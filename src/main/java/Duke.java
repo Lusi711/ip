@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String indentLine = "----------------------------------------";
+    private static final String indentLine = "--------------------------------------------------";
     private static Task[] tasks = new Task[100];
     private static int numberOfTasks = 0;
 
