@@ -1,8 +1,12 @@
+import jdk.jfr.Event;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static String indentLine = "----------------------------------------";
+    private static final String indentLine = "----------------------------------------";
+    private static Task[] tasks = new Task[100];
+    private static int numberOfTasks = 0;
 
     public static void enterGreet() {
         System.out.println(indentLine);
@@ -15,46 +19,96 @@ public class Duke {
         System.out.println(indentLine);
     }
 
-    public static void Echo() {
-        String line = null;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        while (!line.equals("bye")) {
-            System.out.print(indentLine + "\n" + line + "\n" + indentLine + "\n");
-            line = in.nextLine();
+    public static void Echo(String line) {
+        System.out.print(indentLine + "\n" + line + "\n" + indentLine + "\n");
+        System.out.println(indentLine);
+    }
+
+    public static void addList(String line) {
+        System.out.println(indentLine);
+
+        //input[0] = command by user, input[1] = task
+        String[] input = line.split(" ", 2);
+        if (input[0].equals("todo")) {
+            System.out.println("Got it. I've added this task:");
+            tasks[numberOfTasks] = new ToDo(input[1]);
+            System.out.println("  " + tasks[numberOfTasks]);
+        } else if (input[0].equals("deadline")) {
+            System.out.println("Got it. I've added this task:");
+            String[] description = input[1].split("/");
+            tasks[numberOfTasks] = new Deadline(description[0],
+                    description[1].substring(description[1].indexOf(' ')+1));
+            System.out.println("  " + tasks[numberOfTasks]);
+        } else if (input[0].equals("event")) {
+            System.out.println("Got it. I've added this task:");
+            String[] description = input[1].split("/");
+            tasks[numberOfTasks] = new Events(description[0],
+                    description[1].substring(description[1].indexOf(' ')+1));
+            System.out.println("  " + tasks[numberOfTasks]);
+        } else {
+            System.out.println("added: " + input);
         }
-        System.out.println(indentLine);
-    }
-
-    public static void addList(Task[] items, String task, int numberOfTasks) {
-        System.out.println(indentLine);
-
-        items[numberOfTasks] = new Task(task);
-        System.out.println("added: " + task);
+        numberOfTasks++;
+        if (numberOfTasks > 1) {
+            System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        } else {
+            System.out.println("Now you have " + numberOfTasks + " task in the list.");
+        }
 
         System.out.println(indentLine);
     }
 
-    public static void markAsDone(Task[] items, String line) {
+    public static void markAsDone(String input) {
         System.out.println(indentLine);
 
         System.out.println("Nice! I've marked this task as done: ");
-        int itemIndex = Integer.parseInt(line.substring(line.length() - 1));
-        items[itemIndex - 1].markAsDone();
-        Task t = items[itemIndex - 1];
-        System.out.println("  " + t.getStatusIcon() + " " + t.description);
+        int taskIndex = Integer.parseInt(input);
+        tasks[taskIndex - 1].markAsDone();
+        System.out.println("  "+tasks[taskIndex - 1]);
 
         System.out.println(indentLine);
     }
 
-    public static void displayList(Task[] items) {
+    public static void displayList(Task[] tasks) {
         System.out.println(indentLine);
 
         System.out.println("Here are the tasks in your list:");
-        int itemIndex = 1;
-        for (Task item : items) {
-            System.out.println(itemIndex + ". " + item.getStatusIcon() + " " + item.description);
-            itemIndex++;
+        int taskIndex = 1;
+        for (Task task : tasks) {
+            System.out.println(taskIndex + ". " + task);
+            taskIndex++;
+        }
+
+        System.out.println(indentLine);
+    }
+
+    public static void executeCommand() {
+        Scanner in = new Scanner(System.in);
+        String line = in.nextLine();
+        //Process command-line input
+        while (!line.equals("bye")) {
+            String[] command = line.split(" ", 2);
+            switch (command[0]) {
+            case "list":
+                displayList(Arrays.copyOf(tasks, numberOfTasks));
+                break;
+            case "done":
+                markAsDone(command[1]);
+                break;
+            case "todo":
+                addList(line);
+                break;
+            case "deadline":
+                addList(line);
+                break;
+            case "event":
+                addList(line);
+                break;
+            //default:
+            //addList(line);
+            //break;
+            }
+            line = in.nextLine();
         }
         System.out.println(indentLine);
     }
@@ -67,27 +121,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        //Level-0
+        //Greets the user upon entering
         enterGreet();
-
-        //Level-3
-        Scanner in = new Scanner(System.in);
-        Task[] items = new Task[100];
-        String line = in.nextLine();
-        int numberOfTasks = 0;
-        while (!line.equals("bye")) {
-            if (line.equals("list")) {
-                displayList(Arrays.copyOf(items, numberOfTasks));
-            } else if (line.contains("done")) {
-                markAsDone(items, line);
-            } else {
-                addList(items, line, numberOfTasks);
-                numberOfTasks++;
-            }
-            line = in.nextLine();
-        }
-        System.out.println(indentLine);
-
+        //Executes command-line input of user
+        executeCommand();
+        //Displays exit message
         farewellGreet();
     }
 }
