@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.CommandType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -7,12 +15,14 @@ public class Duke {
     private static Task[] tasks = new Task[MAX_TASKS];
     private static int numberOfTasks = 0;
 
+    //Prints greeting message when opening the application
     private static void enterGreet() {
         System.out.println(INDENTLINE);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
         System.out.println(INDENTLINE);
     }
 
+    //Prints farewell message after command = 'bye'
     private static void farewellGreet() {
         System.out.println(INDENTLINE);
         System.out.println("Bye. Hope to see you again soon!\n");
@@ -39,6 +49,7 @@ public class Duke {
         tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
     }
 
+    //Adds Task instance to tasks
     private static void addList(CommandType commandType, String input) {
         switch(commandType) {
         case COMMAND_TODO:
@@ -71,6 +82,7 @@ public class Duke {
         }
     }
 
+    //Changes isDone of specified Task as True
     private static void markAsDone(String input) {
         int taskIndex;
 
@@ -95,6 +107,7 @@ public class Duke {
         System.out.println("  " + tasks[taskIndex - 1]);
     }
 
+    //Prints the tasks array
     private static void displayList(Task[] tasks) {
         System.out.println("Here are the tasks in your list:");
         int taskIndex = 1;
@@ -104,13 +117,14 @@ public class Duke {
         }
     }
 
+    //Processes command-line input
     private static void executeCommand() {
         Scanner in = new Scanner(System.in);
 
-        //Process command-line input
         while (true) {
             String line = in.nextLine();
             String[] command = line.split(" ", 2);
+            //Identify the specific command by user
             CommandType commandType = CommandType.COMMAND_UNKNOWN;
             System.out.println(INDENTLINE);
             try {
@@ -158,7 +172,6 @@ public class Duke {
             return CommandType.COMMAND_DONE;
         default:
             throw new DukeException();
-            //return CommandType.COMMAND_UNKNOWN;
         }
     }
 
