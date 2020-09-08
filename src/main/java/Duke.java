@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String indentLine = "--------------------------------------------------";
-    private static Task[] tasks = new Task[100];
+    public static final int MAX_TASKS = 100;
+    private static Task[] tasks = new Task[MAX_TASKS];
     private static int numberOfTasks = 0;
 
     public static void enterGreet() {
@@ -16,27 +17,34 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!\n");
         System.out.println(indentLine);
     }
-
+    /*
     public static void Echo(String line) {
         System.out.println(line);
     }
+    */
 
     public static void addList(String type, String input) {
         System.out.println("Got it. I've added this task:");
         String[] description = input.split("/");
         switch (type) {
         case "todo":
-            tasks[numberOfTasks] = new ToDo(input);
+            try {
+                tasks[numberOfTasks] = new ToDo(input);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! The todo description cannot be empty. :(");
+                return;
+            }
             break;
         case "deadline":
-            tasks[numberOfTasks] = new Deadline(description[0],
-                    description[1].substring(description[1].indexOf(' ') + 1));
+            String by = description[1];
+            tasks[numberOfTasks] = new Deadline(description[0], by.substring(by.indexOf(' ') + 1));
             break;
         case "event":
-            tasks[numberOfTasks] = new Events(description[0],
-                    description[1].substring(description[1].indexOf(' ') + 1));
+            String at = description[1];
+            tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
             break;
         default:
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             break;
         }
         System.out.println("  " + tasks[numberOfTasks]);
@@ -49,9 +57,26 @@ public class Duke {
     }
 
     public static void markAsDone(String input) {
+        int taskIndex;
+
+        try {
+            taskIndex = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Please list a task number to be marked done: " + input);
+            return;
+        }
+
+        try {
+            tasks[taskIndex - 1].markAsDone();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! Task number does not exist in the list: " + taskIndex);
+            return;
+        } catch (NullPointerException e) {
+            System.out.println("OOPS!!! This is an invalid task number : " + taskIndex);
+            return;
+        }
+
         System.out.println("Nice! I've marked this task as done: ");
-        int taskIndex = Integer.parseInt(input);
-        tasks[taskIndex - 1].markAsDone();
         System.out.println("  " + tasks[taskIndex - 1]);
     }
 
