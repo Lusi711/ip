@@ -2,51 +2,66 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String indentLine = "--------------------------------------------------";
-    public static final int MAX_TASKS = 100;
+    private static final String INDENTLINE = "----------------------------------------------------------";
+    private static final int MAX_TASKS = 100;
     private static Task[] tasks = new Task[MAX_TASKS];
     private static int numberOfTasks = 0;
 
-    public static void enterGreet() {
-        System.out.println(indentLine);
+    private static void enterGreet() {
+        System.out.println(INDENTLINE);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
-        System.out.println(indentLine);
+        System.out.println(INDENTLINE);
     }
 
-    public static void farewellGreet() {
+    private static void farewellGreet() {
+        System.out.println(INDENTLINE);
         System.out.println("Bye. Hope to see you again soon!\n");
-        System.out.println(indentLine);
+        System.out.println(INDENTLINE);
     }
     /*
     public static void Echo(String line) {
         System.out.println(line);
     }
     */
+    private static void addToDo(String input) {
+        tasks[numberOfTasks] = new ToDo(input);
+    }
 
-    public static void addList(String type, String input) {
-        System.out.println("Got it. I've added this task:");
+    private static void addDeadline(String input) {
         String[] description = input.split("/");
-        switch (type) {
-        case "todo":
+        String by = description[1];
+        tasks[numberOfTasks] = new Deadline(description[0],by.substring(by.indexOf(' ') + 1));
+    }
+
+    private static void addEvent(String input) {
+        String[] description = input.split("/");
+        String at = description[1];
+        tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
+    }
+
+    private static void addList(CommandType commandType, String input) {
+        switch(commandType) {
+        case COMMAND_TODO:
+            addToDo(input);
+            break;
+        case COMMAND_DEADLINE:
             try {
-                tasks[numberOfTasks] = new ToDo(input);
-            } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("OOPS!!! The todo description cannot be empty. :(");
+                addDeadline(input);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! There must be a description after /by.");
                 return;
             }
             break;
-        case "deadline":
-            String by = description[1];
-            tasks[numberOfTasks] = new Deadline(description[0], by.substring(by.indexOf(' ') + 1));
-            break;
-        case "event":
-            String at = description[1];
-            tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
-            break;
-        default:
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case COMMAND_EVENT:
+            try {
+                addEvent(input);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("OOPS!!! There must be a description after /at.");
+                return;
+            }
             break;
         }
+        System.out.println("Got it. I've added this task:");
         System.out.println("  " + tasks[numberOfTasks]);
         numberOfTasks++;
         if (numberOfTasks > 1) {
@@ -56,7 +71,7 @@ public class Duke {
         }
     }
 
-    public static void markAsDone(String input) {
+    private static void markAsDone(String input) {
         int taskIndex;
 
         try {
@@ -80,7 +95,7 @@ public class Duke {
         System.out.println("  " + tasks[taskIndex - 1]);
     }
 
-    public static void displayList(Task[] tasks) {
+    private static void displayList(Task[] tasks) {
         System.out.println("Here are the tasks in your list:");
         int taskIndex = 1;
         for (Task task : tasks) {
@@ -89,28 +104,62 @@ public class Duke {
         }
     }
 
-    public static void executeCommand() {
+    private static void executeCommand() {
         Scanner in = new Scanner(System.in);
-        String line = in.nextLine();
+
         //Process command-line input
-        while (!line.equals("bye")) {
+        while (true) {
+            String line = in.nextLine();
             String[] command = line.split(" ", 2);
-            System.out.println(indentLine);
-            switch (command[0]) {
-            case "list":
+            CommandType commandType = CommandType.COMMAND_UNKNOWN;
+            System.out.println(INDENTLINE);
+            try {
+                commandType = readCommandType(command[0]);
+            } catch (DukeException e) {
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println(INDENTLINE);
+                continue;
+            }
+            switch (commandType) {
+            case COMMAND_LIST:
                 displayList(Arrays.copyOf(tasks, numberOfTasks));
                 break;
-            case "done":
+            case COMMAND_DONE:
                 markAsDone(command[1]);
                 break;
+            case COMMAND_BYE:
+                return;
             default:
-                addList(command[0], command[1]);
+                try {
+                    addList(commandType,command[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! The description of a " + command[0] + " cannot be empty.");
+                }
                 break;
             }
-            System.out.println(indentLine);
-            line = in.nextLine();
+            System.out.println(INDENTLINE);
         }
-        System.out.println(indentLine);
+    }
+
+    private static CommandType readCommandType(String command) throws DukeException {
+
+        switch (command) {
+        case ("bye"):
+            return CommandType.COMMAND_BYE;
+        case ("list"):
+            return CommandType.COMMAND_LIST;
+        case("todo"):
+            return CommandType.COMMAND_TODO;
+        case("deadline"):
+            return CommandType.COMMAND_DEADLINE;
+        case("event"):
+            return CommandType.COMMAND_EVENT;
+        case("done"):
+            return CommandType.COMMAND_DONE;
+        default:
+            throw new DukeException();
+            //return CommandType.COMMAND_UNKNOWN;
+        }
     }
 
     public static void main(String[] args) {
