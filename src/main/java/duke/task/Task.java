@@ -3,7 +3,6 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected String descriptor;
 
     public Task(String description) {
         this.description = description;
@@ -20,6 +19,10 @@ public class Task {
 
     @Override
     public String toString() {
+        return getStatusIcon() + " " + description;
+    }
+
+    public String toFile() {
         return getStatusIcon() + " " + description;
     }
 }

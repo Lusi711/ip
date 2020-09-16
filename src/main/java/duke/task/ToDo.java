@@ -2,6 +2,8 @@ package duke.task;
 
 public class ToDo extends Task {
 
+    private String descriptor;
+
     public ToDo(String description) {
         super(description);
         this.descriptor = "[T]";
@@ -9,6 +11,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return descriptor + super.toString();
+        return descriptor + super.toFile();
     }
 }

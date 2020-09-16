@@ -3,6 +3,7 @@ package duke.task;
 public class Deadline extends Task {
 
     protected String by;
+    private String descriptor;
 
     public Deadline(String description, String by) {
         super(description);
@@ -13,5 +14,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return descriptor + super.toString() + " (by: " + by + ")";
+    }
+
+    public String toFile() {
+        return descriptor + super.toFile() + " | " + by;
     }
 }

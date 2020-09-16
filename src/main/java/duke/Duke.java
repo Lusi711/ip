@@ -8,12 +8,17 @@ import duke.task.ToDo;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
     private static final String INDENTLINE = "----------------------------------------------------------";
     private static final int MAX_TASKS = 100;
-    private static Task[] tasks = new Task[MAX_TASKS];
+    protected static Task[] tasks = new Task[MAX_TASKS];
     private static int numberOfTasks = 0;
+    private static boolean isChanged = false;
 
     //Prints greeting message when opening the application
     private static void enterGreet() {
@@ -28,50 +33,48 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!\n");
         System.out.println(INDENTLINE);
     }
-    /*
-    public static void Echo(String line) {
-        System.out.println(line);
-    }
-    */
-    private static void addToDo(String input) {
-        tasks[numberOfTasks] = new ToDo(input);
+
+    protected static void addToDo(String input) {
+        tasks[numberOfTasks] = new ToDo(input.trim());
     }
 
-    private static void addDeadline(String input) {
-        String[] description = input.split("/");
-        String by = description[1];
-        tasks[numberOfTasks] = new Deadline(description[0],by.substring(by.indexOf(' ') + 1));
+    protected static void addDeadline(String input, String delimiter) {
+        String[] description = input.split(delimiter);
+        tasks[numberOfTasks] = new Deadline(description[0].trim(), description[1]);
     }
 
-    private static void addEvent(String input) {
-        String[] description = input.split("/");
-        String at = description[1];
-        tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
+    protected static void addEvent(String input, String delimiter) {
+        String[] description = input.split(delimiter);
+        tasks[numberOfTasks] = new Event(description[0].trim(), description[1]);
     }
 
     //Adds Task instance to tasks
     private static void addList(CommandType commandType, String input) {
+        String regex;
         switch(commandType) {
         case COMMAND_TODO:
             addToDo(input);
             break;
         case COMMAND_DEADLINE:
+            regex = " /by ";
             try {
-                addDeadline(input);
+                addDeadline(input, regex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! There must be a description after /by.");
                 return;
             }
             break;
         case COMMAND_EVENT:
+            regex = " /at ";
             try {
-                addEvent(input);
+                addEvent(input, regex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("OOPS!!! There must be a description after /at.");
                 return;
             }
             break;
         }
+        isChanged = true;
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + tasks[numberOfTasks]);
         numberOfTasks++;
@@ -140,6 +143,7 @@ public class Duke {
                 break;
             case COMMAND_DONE:
                 markAsDone(command[1]);
+                isChanged = true;
                 break;
             case COMMAND_BYE:
                 return;
@@ -181,12 +185,28 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        FileProcessing file = new FileProcessing();
+
         System.out.println("Hello from\n" + logo);
 
         //Greets the user upon entering
         enterGreet();
+        //Reads file content to load tasks
+        try {
+            numberOfTasks = file.readFileContents(tasks);
+        } catch (FileNotFoundException e) {
+            file.createFile();
+        }
         //Executes command-line input of user
         executeCommand();
+        //Save tasks to text file if there are any changes made
+        if (isChanged) {
+            try {
+                file.writeToFile(Arrays.copyOf(tasks, numberOfTasks));
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
         //Displays exit message
         farewellGreet();
     }
