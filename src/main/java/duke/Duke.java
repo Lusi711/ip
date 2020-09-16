@@ -6,14 +6,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final String INDENTLINE = "----------------------------------------------------------";
-    private static final int MAX_TASKS = 100;
-    private static Task[] tasks = new Task[MAX_TASKS];
-    private static int numberOfTasks = 0;
+    //private static final int MAX_TASKS = 100;
+    //private static Task[] tasks = new Task[MAX_TASKS];
+    private static ArrayList<Task> tasks = new ArrayList<>();
+    //private static int numberOfTasks = 0;
 
     //Prints greeting message when opening the application
     private static void enterGreet() {
@@ -28,30 +31,29 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!\n");
         System.out.println(INDENTLINE);
     }
+
     /*
     public static void Echo(String line) {
         System.out.println(line);
     }
     */
     private static void addToDo(String input) {
-        tasks[numberOfTasks] = new ToDo(input);
+        tasks.add(new ToDo(input));
     }
 
     private static void addDeadline(String input) {
-        String[] description = input.split("/");
-        String by = description[1];
-        tasks[numberOfTasks] = new Deadline(description[0],by.substring(by.indexOf(' ') + 1));
+        String[] description = input.split("/by ");
+        tasks.add(new Deadline(description[0], description[1]));
     }
 
     private static void addEvent(String input) {
-        String[] description = input.split("/");
-        String at = description[1];
-        tasks[numberOfTasks] = new Event(description[0], at.substring(at.indexOf(' ') + 1));
+        String[] description = input.split("/at ");
+        tasks.add(new Event(description[0], description[1]));
     }
 
     //Adds Task instance to tasks
     private static void addList(CommandType commandType, String input) {
-        switch(commandType) {
+        switch (commandType) {
         case COMMAND_TODO:
             addToDo(input);
             break;
@@ -73,12 +75,11 @@ public class Duke {
             break;
         }
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + tasks[numberOfTasks]);
-        numberOfTasks++;
-        if (numberOfTasks > 1) {
-            System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        System.out.println("  " + tasks.get(tasks.size() - 1));
+        if (tasks.size() > 1) {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } else {
-            System.out.println("Now you have " + numberOfTasks + " task in the list.");
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
         }
     }
 
@@ -94,26 +95,47 @@ public class Duke {
         }
 
         try {
-            tasks[taskIndex - 1].markAsDone();
+            tasks.get(taskIndex - 1).markAsDone();
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! Task number does not exist in the list: " + taskIndex);
-            return;
-        } catch (NullPointerException e) {
-            System.out.println("OOPS!!! This is an invalid task number : " + taskIndex);
+            System.out.println("OOPS!!! There are only " + tasks.size() + " tasks on the list.");
             return;
         }
 
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + tasks[taskIndex - 1]);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  " + tasks.get(taskIndex - 1));
+    }
+
+    private static void removeTask(String input) {
+        int taskIndex;
+
+        try {
+            taskIndex = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("OOPS!!! Please list a task number to be deleted: " + input);
+            return;
+        }
+
+        try {
+            Task deletedTask = tasks.get(taskIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("OOPS!!! There are only " + tasks.size() + " tasks on the list");
+            return;
+        }
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + tasks.get(taskIndex - 1));
+        tasks.remove(tasks.get(taskIndex - 1));
+        if (tasks.size() > 1) {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " task in the list.");
+        }
     }
 
     //Prints the tasks array
-    private static void displayList(Task[] tasks) {
+    private static void displayList() {
         System.out.println("Here are the tasks in your list:");
-        int taskIndex = 1;
         for (Task task : tasks) {
-            System.out.println(taskIndex + ". " + task);
-            taskIndex++;
+            System.out.println((tasks.indexOf(task) + 1) + ". " + task);
         }
     }
 
@@ -136,16 +158,27 @@ public class Duke {
             }
             switch (commandType) {
             case COMMAND_LIST:
-                displayList(Arrays.copyOf(tasks, numberOfTasks));
+                displayList();
                 break;
             case COMMAND_DONE:
-                markAsDone(command[1]);
+                try {
+                    markAsDone(command[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! Please provide a valid index number for: "+command[0]);
+                }
+                break;
+            case COMMAND_DELETE:
+                try {
+                    removeTask(command[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("OOPS!!! Please provide a valid index number for: " + command[0]);
+                }
                 break;
             case COMMAND_BYE:
                 return;
             default:
                 try {
-                    addList(commandType,command[1]);
+                    addList(commandType, command[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("OOPS!!! The description of a " + command[0] + " cannot be empty.");
                 }
@@ -162,14 +195,16 @@ public class Duke {
             return CommandType.COMMAND_BYE;
         case ("list"):
             return CommandType.COMMAND_LIST;
-        case("todo"):
+        case ("todo"):
             return CommandType.COMMAND_TODO;
-        case("deadline"):
+        case ("deadline"):
             return CommandType.COMMAND_DEADLINE;
-        case("event"):
+        case ("event"):
             return CommandType.COMMAND_EVENT;
-        case("done"):
+        case ("done"):
             return CommandType.COMMAND_DONE;
+        case ("delete"):
+            return CommandType.COMMAND_DELETE;
         default:
             throw new DukeException();
         }
