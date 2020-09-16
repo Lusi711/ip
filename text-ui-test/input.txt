@@ -1,7 +1,9 @@
-todo Answer CS2113 tutorial questions
-event CS2113 tutorial /at Thursday 12-1pm
-deadline Submit TP direction on Teammates /by today
-todo Complete code review
-list
+todo read book
+done 1
+deadline return book /by June 6th
 done 2
-list
+event project meeting /at Aug 6th 2-4pm
+todo join sports club
+done 4
+todo borrow book
+delete 3

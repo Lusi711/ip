@@ -7,5 +7,6 @@ public enum CommandType {
     COMMAND_TODO,
     COMMAND_DEADLINE,
     COMMAND_EVENT,
+    COMMAND_DELETE,
     COMMAND_UNKNOWN
 }
