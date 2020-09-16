@@ -2,6 +2,7 @@ package duke.task;
 
 public class Event extends Task {
     protected String at;
+    private String descriptor;
 
     public Event(String description, String at) {
         super(description);
@@ -11,6 +12,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return descriptor + super.toString() + " (at: " + at + ")";
+    }
+
+    public String toFile() {
+        return descriptor + super.toFile() + " | " + at;
     }
 }
