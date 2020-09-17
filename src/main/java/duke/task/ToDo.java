@@ -13,4 +13,9 @@ public class ToDo extends Task {
     public String toString() {
         return descriptor + super.toString();
     }
+
+    @Override
+    public String toFile() {
+        return descriptor + super.toFile();
+    }
 }

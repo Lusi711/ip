@@ -1,16 +1,14 @@
 package duke;
 
 import duke.command.CommandType;
+import duke.command.FileProcessing;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
