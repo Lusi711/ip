@@ -1,63 +1,58 @@
 package duke.storage;
 
-import duke.Duke;
-import duke.task.Deadline;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Storage extends Duke {
-    String filePath = "data/duke.txt";
+public class Storage {
 
-    public Storage() {
+    private String filePath;
+    private static final String MESSAGE_IOEXCEPTION = "Something went wrong.";
 
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public void createFile() {
-        File folder = new File(filePath.substring(0, 4));
+    public void createFile(Ui ui) {
+        File folder = new File(filePath.substring(0,filePath.indexOf("/")));
         folder.mkdirs();
         File f = new File(filePath);
         try {
-            folder.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Something went wrong. " + e.getMessage());
+            f.createNewFile();
+        } catch (IOException ioe) {
+            ui.showFeedbackMessage(MESSAGE_IOEXCEPTION,ioe.getMessage());
         }
     }
 
-    public void readFileContents(ArrayList<Task> tasks) throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
 
-        int index = 0;
-        while (s.hasNext()) {
-            String[] sentence = s.nextLine().split("] ",2);
-            if (sentence[0].startsWith("[T]")) {
-                Duke.addToDo(sentence[1]);
-            } else if (sentence[0].startsWith("[D]")) {
-                Duke.addDeadline(sentence[1], "\\| ");
-            } else if (sentence[0].startsWith("[E]")) {
-                Duke.addEvent(sentence[1],"\\| ");
-            }
-            //Mark task as done if indicated in the text
-            if (sentence[0].contains("\u2713")) {
-                tasks.get(index).markAsDone();
-            }
-            index++;
-        }
+        ArrayList<Task> tasks = TaskListDecoder.decodeTaskList(s);
         s.close();
+
+        return tasks;
     }
 
-    public void writeToFile(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : tasks) {
-            fw.write(task.toFile()+"\n");
+    public void save(TaskList taskList, Ui ui) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            List<String> encodedTaskList = TaskListEncoder.encodeTaskList(taskList);
+            for (String output : encodedTaskList) {
+                fw.write(output+"\n");
+            }
+            fw.close();
+        } catch (IOException ioe) {
+            ui.showFeedbackMessage(MESSAGE_IOEXCEPTION, ioe.getMessage());
         }
-        fw.close();
     }
 }
