@@ -3,20 +3,23 @@ package duke.task;
 public class Deadline extends Task {
 
     protected String by;
-    private String descriptor;
+    private static final String DESCRIPTOR = "[D]";
 
     public Deadline(String description, String by) {
         super(description);
-        this.descriptor = "[D]";
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return descriptor + super.toString() + " (by: " + by + ")";
+        return DESCRIPTOR + super.toString() + " (by: " + by + ")";
     }
 
-    public String toFile() {
-        return descriptor + super.toFile() + " | " + by;
+    public String encodeToFile() {
+        return DESCRIPTOR + super.encodeToFile() + " | " + by;
+    }
+
+    public String getDescriptor() {
+        return DESCRIPTOR;
     }
 }

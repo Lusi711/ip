@@ -2,20 +2,23 @@ package duke.task;
 
 public class Event extends Task {
     protected String at;
-    private String descriptor;
+    private static final String DESCRIPTOR = "[E]";
 
     public Event(String description, String at) {
         super(description);
-        this.descriptor = "[E]";
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return descriptor + super.toString() + " (at: " + at + ")";
+        return DESCRIPTOR + super.toString() + " (at: " + at + ")";
     }
 
-    public String toFile() {
-        return descriptor + super.toFile() + " | " + at;
+    public String encodeToFile() {
+        return DESCRIPTOR + super.encodeToFile() + " | " + at;
+    }
+
+    public String getDescriptor() {
+        return DESCRIPTOR;
     }
 }

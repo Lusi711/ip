@@ -2,20 +2,23 @@ package duke.task;
 
 public class ToDo extends Task {
 
-    private String descriptor;
+    private static final String DESCRIPTOR = "[T]";
 
     public ToDo(String description) {
         super(description);
-        this.descriptor = "[T]";
     }
 
     @Override
     public String toString() {
-        return descriptor + super.toString();
+        return DESCRIPTOR + super.toString();
     }
 
     @Override
-    public String toFile() {
-        return descriptor + super.toFile();
+    public String encodeToFile() {
+        return DESCRIPTOR + super.encodeToFile();
+    }
+
+    public String getDescriptor() {
+        return DESCRIPTOR;
     }
 }

@@ -22,7 +22,10 @@ public class Task {
         return getStatusIcon() + " " + description;
     }
 
-    public String toFile() {
+    public String encodeToFile() {
         return getStatusIcon() + " " + description;
+    }
+    public String getDescriptor() {
+        return null;
     }
 }
