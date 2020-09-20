@@ -1,36 +1,62 @@
 package duke;
 
-import duke.command.CommandType;
+import duke.command.Command;
+import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    private static final String INDENTLINE = "----------------------------------------------------------";
-    protected static ArrayList<Task> tasks = new ArrayList<>();
-    private static boolean isChanged = false;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
-    //Prints greeting message when opening the application
-    private static void enterGreet() {
-        System.out.println(INDENTLINE);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
-        System.out.println(INDENTLINE);
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException fnfe) {
+            storage.createFile(ui);
+            tasks = new TaskList();
+        }
     }
 
-    //Prints farewell message after command = 'bye'
-    private static void farewellGreet() {
-        System.out.println(INDENTLINE);
-        System.out.println("Bye. Hope to see you again soon!\n");
-        System.out.println(INDENTLINE);
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
+    public void run() {
+        start();
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    private void start() {
+        ui.showWelcomeMessage();
+    }
+
+    private void exit() {
+        ui.showGoodbyeMessage();
+        System.exit(0);
+    }
+
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            ui.showLine();
+            Command c = new Parser().parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+
+            ui.showLine();
+        }
+    }
+/*
     protected static void addToDo(String input) {
         tasks.add(new ToDo(input));
     }
@@ -208,11 +234,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
         Storage file = new Storage();
 
         System.out.println("Hello from\n" + logo);
@@ -238,4 +259,5 @@ public class Duke {
         //Displays exit message
         farewellGreet();
     }
+ */
 }
