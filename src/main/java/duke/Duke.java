@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.CommandType;
-import duke.command.FileProcessing;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -213,7 +213,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        FileProcessing file = new FileProcessing();
+        Storage file = new Storage();
 
         System.out.println("Hello from\n" + logo);
 

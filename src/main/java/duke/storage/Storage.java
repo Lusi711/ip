@@ -1,4 +1,4 @@
-package duke.command;
+package duke.storage;
 
 import duke.Duke;
 import duke.task.Deadline;
@@ -12,10 +12,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class FileProcessing extends Duke {
+public class Storage extends Duke {
     String filePath = "data/duke.txt";
 
-    public FileProcessing() {
+    public Storage() {
 
     }
 
