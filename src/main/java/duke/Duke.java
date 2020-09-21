@@ -10,6 +10,7 @@ import static duke.ui.Messages.MESSAGE_DECODE_FAILURE_FORMAT;
 import static duke.ui.Messages.MESSAGE_MISSING_FILEPATH;
 
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     protected Storage storage;
@@ -29,6 +30,9 @@ public class Duke {
             exit();
         } catch (NullPointerException npe) {
             ui.showFeedbackMessage(MESSAGE_MISSING_FILEPATH, npe.getMessage());
+        } catch (DateTimeParseException dpe) {
+            ui.showFeedbackMessage(MESSAGE_DECODE_FAILURE_FORMAT + filePath, dpe.getMessage());
+            exit();
         } catch (DukeException de) {
             ui.showFeedbackMessage(MESSAGE_DECODE_FAILURE_FORMAT + filePath, de.getMessage());
             exit();
