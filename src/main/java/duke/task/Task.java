@@ -25,7 +25,4 @@ public class Task {
     public String encodeToFile() {
         return getStatusIcon() + " " + description;
     }
-    public String getDescriptor() {
-        return null;
-    }
 }

@@ -1,14 +1,16 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.ui.Messages.*;
+import static duke.ui.Messages.MESSAGE_GOODBYE;
+import static duke.ui.Messages.MESSAGE_DISPLAY_LIST;
+import static duke.ui.Messages.MESSAGE_ENQUIRY;
+import static duke.ui.Messages.MESSAGE_WELCOME;
 
 public class Ui {
     private static final String DIVIDER = "------------------------------------------------------------------";

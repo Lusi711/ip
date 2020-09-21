@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             if (tasks.getNumberOfTasks() > 0) {
                 ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
             } else {
-                ui.showFeedbackMessage(MESSAGE_EMPTY_LIST+COMMAND_WORD);
+                ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
             return;
         }

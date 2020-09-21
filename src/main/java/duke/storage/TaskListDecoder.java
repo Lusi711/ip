@@ -18,16 +18,16 @@ public class TaskListDecoder {
     private static final String DEADLINE_DESCRIPTOR = "[D]";
     private static final String EVENT_DESCRIPTOR = "[E]";
 
-    public static ArrayList<Task> decodeTaskList(Scanner s) throws DukeException, ArrayIndexOutOfBoundsException {
+    public static ArrayList<Task> decodeTaskList(Scanner s) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
-            String[] parts = s.nextLine().split("] ",2);
+            String[] parts = s.nextLine().split("] ", 2);
             if (parts[0].startsWith(TODO_DESCRIPTOR)) {
-                tasks.add(decodeToDoFromString(parts[0].trim(),parts[1].trim()));
+                tasks.add(decodeToDoFromString(parts[0].trim(), parts[1].trim()));
             } else if (parts[0].startsWith(DEADLINE_DESCRIPTOR)) {
-                tasks.add(decodeDeadlineFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeDeadlineFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else if (parts[0].startsWith(EVENT_DESCRIPTOR)) {
-                tasks.add(decodeEventFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeEventFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else {
                 throw new DukeException();
             }
