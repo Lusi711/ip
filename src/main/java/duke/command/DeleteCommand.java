@@ -5,7 +5,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class DeleteCommand extends Command{
+import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
+import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
+
+public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 
@@ -17,10 +20,20 @@ public class DeleteCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task deletedTask = tasks.deleteTask(targetIndex);
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  "+deletedTask);
-
         int numberOfTasks = tasks.getNumberOfTasks();
+        Task deletedTask;
+        try {
+            deletedTask = tasks.deleteTask(targetIndex);
+        } catch (IndexOutOfBoundsException ioe) {
+            if (tasks.getNumberOfTasks() > 0) {
+                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + numberOfTasks + ": " + (targetIndex + 1));
+            } else {
+                ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
+            }
+            return;
+        }
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + deletedTask);
+
         if (numberOfTasks == 1) {
             ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
         } else {

@@ -11,9 +11,9 @@ import java.util.Scanner;
 import static duke.ui.Messages.*;
 
 public class Ui {
-    private static final String DIVIDER = "----------------------------------------------------------";
+    private static final String DIVIDER = "------------------------------------------------------------------";
 
-    private static final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -38,7 +38,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        showToUser(DIVIDER, MESSAGE_WELCOME, logo, MESSAGE_ENQUIRY, DIVIDER);
+        showToUser(DIVIDER, MESSAGE_WELCOME, LOGO, MESSAGE_ENQUIRY, DIVIDER);
     }
 
     public void showGoodbyeMessage() {

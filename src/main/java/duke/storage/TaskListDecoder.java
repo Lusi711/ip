@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,7 +16,7 @@ public class TaskListDecoder {
     private static final String DEADLINE_DESCRIPTOR = "[D]";
     private static final String EVENT_DESCRIPTOR = "[E]";
 
-    public static ArrayList<Task> decodeTaskList(Scanner s) {
+    public static ArrayList<Task> decodeTaskList(Scanner s) throws DukeException, ArrayIndexOutOfBoundsException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
             String[] parts = s.nextLine().split("] ",2);
@@ -24,7 +25,9 @@ public class TaskListDecoder {
             } else if (parts[0].startsWith(DEADLINE_DESCRIPTOR)) {
                 tasks.add(decodeDeadlineFromString(parts[0].trim(),parts[1].trim(),"\\| "));
             } else if (parts[0].startsWith(EVENT_DESCRIPTOR)) {
-                tasks.add(decodeEventFromString(parts[0].trim(),parts[1].trim(),"//| "));
+                tasks.add(decodeEventFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+            } else {
+                throw new DukeException();
             }
         }
 

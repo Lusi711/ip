@@ -1,14 +1,17 @@
 package duke.task;
 
+import duke.ui.Ui;
+
 import java.util.ArrayList;
+
+import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
+import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    private int numberOfTasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
-        numberOfTasks = 0;
     }
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -18,13 +21,13 @@ public class TaskList {
         tasks.add(task);
     }
 
-    public Task deleteTask(int targetIndex) {
+    public Task deleteTask(int targetIndex) throws IndexOutOfBoundsException {
         Task deletedTask = tasks.get(targetIndex);
         tasks.remove(deletedTask);
         return deletedTask;
     }
 
-    public Task markAsDone(int targetIndex) {
+    public Task markAsDone(int targetIndex)  throws IndexOutOfBoundsException {
         tasks.get(targetIndex).markAsDone();
         return tasks.get(targetIndex);
     }
