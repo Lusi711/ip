@@ -18,6 +18,7 @@ import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
  * Keyword matching is case sensitive.
  */
 public class FindCommand extends Command {
+
     public static final String COMMAND_WORD = "find";
 
     private final String keyword;
@@ -34,7 +35,7 @@ public class FindCommand extends Command {
     /**
      * Finds and lists all tasks in task list with description that contains the specified keyword
      *
-     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param tasks   the TaskList that stores all the task data
      * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
@@ -45,11 +46,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Retrieves all tasks in the task list with description contains the specified keyword
+     * Retrieves all tasks in the task list with description that contains the specified keyword
      *
-     * @param tasks the task list that stores all the task data
+     * @param tasks   the task list that stores all the task data
      * @param keyword for searching
-     *
      * @return list of tasks found
      */
     private ArrayList<Task> getTasksWithDescriptionContainingKeyword(TaskList tasks, String keyword) {
@@ -63,6 +63,9 @@ public class FindCommand extends Command {
         return matchedTasks;
     }
 
+    /**
+     * Retrieves a listing of every word in the description, in order.
+     */
     private List<String> getWordsInDescription(String description) {
         return Arrays.asList(description.split(" "));
     }

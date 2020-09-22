@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
 
 /**
- * Finds and lists all tasks in task list occurring on specific date input by user
+ * Finds and lists all deadlines and events in task list occurring on a specific date input by the user.
  */
 public class FindDateCommand extends Command {
+
     public static final String COMMAND_WORD = "date";
 
     private final String date;
@@ -30,9 +31,9 @@ public class FindDateCommand extends Command {
     }
 
     /**
-     * Finds and lists all tasks in task list that occur on specific date
+     * Finds and lists all deadlines and events in task list which occur on {@code date}.
      *
-     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param tasks   the TaskList that stores all the task data
      * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
@@ -43,12 +44,11 @@ public class FindDateCommand extends Command {
     }
 
     /**
-     * Retrieves all tasks in the task list that occur on specific date
+     * Retrieves all deadlines/events in the task list which occur on specific {@code date}
      *
-     * @param tasks the task list that stores all the task data
-     * @param date for searching
-     *
-     * @return list of tasks found
+     * @param tasks the TaskList that stores all the task data
+     * @param date  for searching
+     * @return the list of tasks found
      */
     private ArrayList<Task> getTasksWithTimeEqualsDate(TaskList tasks, String date) {
         String formattedTime;

@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Adds a task with a specific deadline to the task list.
  */
 public class AddDeadlineCommand extends Command {
+
     public static final String COMMAND_WORD = "deadline";
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:";
 

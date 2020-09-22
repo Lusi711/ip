@@ -12,6 +12,7 @@ import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
  * Deletes a task identified using its last displayed index from the task list.
  */
 public class DeleteCommand extends Command {
+
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 

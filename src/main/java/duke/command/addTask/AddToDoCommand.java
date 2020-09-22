@@ -10,6 +10,7 @@ import duke.ui.Ui;
  * Adds a task to the task list.
  */
 public class AddToDoCommand extends Command {
+
     public static final String COMMAND_WORD = "todo";
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:";
 

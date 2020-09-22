@@ -12,6 +12,7 @@ import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
  * Indicates a task identified using its last displayed index as done
  */
 public class DoneCommand extends Command {
+
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:";
 

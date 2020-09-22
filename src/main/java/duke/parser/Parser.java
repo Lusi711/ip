@@ -26,6 +26,7 @@ import java.time.format.DateTimeParseException;
  * Parses user input.
  */
 public class Parser {
+
     /**
      * Parses user input into command for execution.
      *
@@ -144,7 +145,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of find task command based on description.
+     * Parses arguments in the context of the find task command based on description.
      *
      * @param args full command args string
      * @return the prepared command
@@ -154,7 +155,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of find task command based on date.
+     * Parses arguments in the context of the find task command based on date.
      *
      * @param args full command args string
      * @return the prepared command

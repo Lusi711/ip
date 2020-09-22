@@ -15,6 +15,7 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
+
     private static final String DIVIDER = "------------------------------------------------------------------";
 
     private static final String LOGO = " ____        _        \n"

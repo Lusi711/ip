@@ -4,6 +4,7 @@ package duke.ui;
  * Container for user visible messages.
  */
 public class Messages {
+
     public static final String MESSAGE_DECODE_FAILURE_FORMAT = "Oh no! Failed to load the file: ";
     public static final String MESSAGE_MISSING_FILEPATH = "No file name is provided.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
