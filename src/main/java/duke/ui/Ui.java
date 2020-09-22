@@ -47,8 +47,8 @@ public class Ui {
         showToUser(DIVIDER, MESSAGE_GOODBYE, DIVIDER);
     }
 
-    public void showTaskList(ArrayList<Task> tasks) {
-        showToUser(MESSAGE_DISPLAY_LIST);
+    public void showTaskList(String message, ArrayList<Task> tasks) {
+        showToUser(message);
 
         for (Task task : tasks) {
             int taskIndex = tasks.indexOf(task) + 1;

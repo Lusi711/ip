@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
-import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
+import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
             deletedTask = tasks.deleteTask(targetIndex);
         } catch (IndexOutOfBoundsException ioe) {
             if (tasks.getNumberOfTasks() > 0) {
-                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + numberOfTasks + ": " + (targetIndex + 1));
+                ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + numberOfTasks + ": " + (targetIndex + 1));
             } else {
                 ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }

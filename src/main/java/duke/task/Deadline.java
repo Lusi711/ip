@@ -13,6 +13,14 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
     }
 
+    public String getDescriptor() {
+        return DESCRIPTOR;
+    }
+
+    public LocalDateTime getBy() {
+        return by;
+    }
+
     @Override
     public String toString() {
         return DESCRIPTOR + super.toString() + " (by: " + formatTimeToString() + ")";
@@ -24,9 +32,5 @@ public class Deadline extends Task {
 
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + formatTimeToString();
-    }
-
-    public String getDescriptor() {
-        return DESCRIPTOR;
     }
 }
