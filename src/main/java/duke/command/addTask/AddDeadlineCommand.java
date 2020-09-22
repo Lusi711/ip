@@ -13,15 +13,16 @@ public class AddDeadlineCommand extends Command {
     private final Deadline toAdd;
 
     public AddDeadlineCommand(String description, String by) {
-        this.toAdd = new Deadline(description,by);
+        this.toAdd = new Deadline(description, by);
     }
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(toAdd);
         int numberOfTasks = tasks.getNumberOfTasks();
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  "+toAdd);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + toAdd);
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("Now you have "+numberOfTasks+" task in the list.");
+            ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
         } else {
             ui.showFeedbackMessage("Now you have " + numberOfTasks + " tasks in the list.");
         }

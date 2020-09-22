@@ -1,24 +1,31 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime at;
     private static final String DESCRIPTOR = "[E]";
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
+    }
+
+    public LocalDateTime getAt() {
+        return at;
     }
 
     @Override
     public String toString() {
-        return DESCRIPTOR + super.toString() + " (at: " + at + ")";
+        return DESCRIPTOR + super.toString() + " (at: " + formatTimeToString() + ")";
+    }
+
+    private String formatTimeToString() {
+        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
     }
 
     public String encodeToFile() {
-        return DESCRIPTOR + super.encodeToFile() + " | " + at;
-    }
-
-    public String getDescriptor() {
-        return DESCRIPTOR;
+        return DESCRIPTOR + super.encodeToFile() + " | " + formatTimeToString();
     }
 }

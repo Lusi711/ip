@@ -1,14 +1,15 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static duke.ui.Messages.*;
+import static duke.ui.Messages.MESSAGE_GOODBYE;
+import static duke.ui.Messages.MESSAGE_ENQUIRY;
+import static duke.ui.Messages.MESSAGE_WELCOME;
 
 public class Ui {
     private static final String DIVIDER = "------------------------------------------------------------------";
@@ -32,9 +33,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        String fullInputLine = in.nextLine().trim();
-
-        return fullInputLine;
+        return in.nextLine().trim();
     }
 
     public void showWelcomeMessage() {
@@ -45,8 +44,8 @@ public class Ui {
         showToUser(DIVIDER, MESSAGE_GOODBYE, DIVIDER);
     }
 
-    public void showTaskList(ArrayList<Task> tasks) {
-        showToUser(MESSAGE_DISPLAY_LIST);
+    public void showTaskList(String message, ArrayList<Task> tasks) {
+        showToUser(message);
 
         for (Task task : tasks) {
             int taskIndex = tasks.indexOf(task) + 1;
