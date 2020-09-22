@@ -17,10 +17,6 @@ public class Task {
         return description;
     }
 
-    public String getDescriptor() {
-        return null;
-    }
-
     public void markAsDone() {
         isDone = true;
     }

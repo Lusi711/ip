@@ -14,11 +14,8 @@ public class Event extends Task {
         return DESCRIPTOR + super.toString() + " (at: " + at + ")";
     }
 
+    @Override
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + at;
-    }
-
-    public String getDescriptor() {
-        return DESCRIPTOR;
     }
 }

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 
-    private int targetIndex;
+    private final int targetIndex;
 
     public DeleteCommand(int args) {
         targetIndex = args - 1;
@@ -20,20 +20,19 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int numberOfTasks = tasks.getNumberOfTasks();
         Task deletedTask;
         try {
             deletedTask = tasks.deleteTask(targetIndex);
         } catch (IndexOutOfBoundsException ioe) {
             if (tasks.getNumberOfTasks() > 0) {
-                ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + numberOfTasks + ": " + (targetIndex + 1));
+                ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
             } else {
                 ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
             return;
         }
         ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + deletedTask);
-
+        int numberOfTasks = tasks.getNumberOfTasks();
         if (numberOfTasks == 1) {
             ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
         } else {

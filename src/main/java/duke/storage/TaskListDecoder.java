@@ -19,13 +19,13 @@ public class TaskListDecoder {
     public static ArrayList<Task> decodeTaskList(Scanner s) throws DukeException, ArrayIndexOutOfBoundsException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
-            String[] parts = s.nextLine().split("] ",2);
+            String[] parts = s.nextLine().split("] ", 2);
             if (parts[0].startsWith(TODO_DESCRIPTOR)) {
-                tasks.add(decodeToDoFromString(parts[0].trim(),parts[1].trim()));
+                tasks.add(decodeToDoFromString(parts[0].trim(), parts[1].trim()));
             } else if (parts[0].startsWith(DEADLINE_DESCRIPTOR)) {
-                tasks.add(decodeDeadlineFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeDeadlineFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else if (parts[0].startsWith(EVENT_DESCRIPTOR)) {
-                tasks.add(decodeEventFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeEventFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else {
                 throw new DukeException();
             }
@@ -36,7 +36,7 @@ public class TaskListDecoder {
 
     private static Task decodeEventFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        Task event = new Event(parts[0].trim(),parts[1].trim());
+        Task event = new Event(parts[0].trim(), parts[1].trim());
         if (isDone.contains(CHECKMARK)) {
             event.markAsDone();
         }
@@ -46,7 +46,7 @@ public class TaskListDecoder {
 
     private static Task decodeDeadlineFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        Task deadline = new Deadline(parts[0].trim(),parts[1].trim());
+        Task deadline = new Deadline(parts[0].trim(), parts[1].trim());
         if (isDone.contains(CHECKMARK)) {
             deadline.markAsDone();
         }

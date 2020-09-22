@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -32,9 +31,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        String fullInputLine = in.nextLine().trim();
-
-        return fullInputLine;
+        return in.nextLine().trim();
     }
 
     public void showWelcomeMessage() {

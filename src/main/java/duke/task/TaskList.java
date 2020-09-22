@@ -3,11 +3,12 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
     }
+
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -22,7 +23,7 @@ public class TaskList {
         return deletedTask;
     }
 
-    public Task markAsDone(int targetIndex)  throws IndexOutOfBoundsException {
+    public Task markAsDone(int targetIndex) throws IndexOutOfBoundsException {
         tasks.get(targetIndex).markAsDone();
         return tasks.get(targetIndex);
     }

@@ -16,7 +16,7 @@ import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;

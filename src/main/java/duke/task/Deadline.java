@@ -15,11 +15,8 @@ public class Deadline extends Task {
         return DESCRIPTOR + super.toString() + " (by: " + by + ")";
     }
 
+    @Override
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + by;
-    }
-
-    public String getDescriptor() {
-        return DESCRIPTOR;
     }
 }

@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:";
 
-    private int targetIndex;
+    private final int targetIndex;
 
     public DoneCommand(int args) {
         targetIndex = args - 1;
@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             if (tasks.getNumberOfTasks() > 0) {
                 ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
             } else {
-                ui.showFeedbackMessage(MESSAGE_EMPTY_LIST+COMMAND_WORD);
+                ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
             return;
         }

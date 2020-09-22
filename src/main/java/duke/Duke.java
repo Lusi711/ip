@@ -55,7 +55,6 @@ public class Duke {
     }
 
     private void runCommandLoopUntilExitCommand() {
-        Command command;
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();

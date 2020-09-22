@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
     private static final String MESSAGE_IOEXCEPTION = "Something went wrong.";
     private static final String MESSAGE_MISSING_FILEPATH = "No file name is provided.";
 
@@ -26,7 +26,7 @@ public class Storage {
 
     public void createFile(Ui ui) {
         try {
-            File folder = new File(filePath.substring(0,filePath.indexOf("/")));
+            File folder = new File(filePath.substring(0, filePath.indexOf("/")));
             folder.mkdirs();
         } catch (NullPointerException npe) {
             ui.showFeedbackMessage(MESSAGE_MISSING_FILEPATH, npe.getMessage());
@@ -37,7 +37,7 @@ public class Storage {
         } catch (NullPointerException npe) {
             ui.showFeedbackMessage(MESSAGE_IOEXCEPTION, npe.getMessage());
         } catch (IOException ioe) {
-            ui.showFeedbackMessage(MESSAGE_MISSING_FILEPATH,ioe.getMessage());
+            ui.showFeedbackMessage(MESSAGE_MISSING_FILEPATH, ioe.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             List<String> encodedTaskList = TaskListEncoder.encodeTaskList(taskList);
             for (String output : encodedTaskList) {
-                fw.write(output+"\n");
+                fw.write(output + "\n");
             }
             fw.close();
         } catch (IOException ioe) {

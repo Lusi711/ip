@@ -1,6 +1,12 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.IncorrectCommand;
+import duke.command.ListCommand;
 import duke.command.addTask.AddDeadlineCommand;
 import duke.command.addTask.AddEventCommand;
 import duke.command.addTask.AddToDoCommand;
@@ -25,7 +31,7 @@ public class Parser {
             try {
                 return new AddToDoCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-               return new IncorrectCommand(MESSAGE_MISSING_TODO_DESCRIPTION);
+                return new IncorrectCommand(MESSAGE_MISSING_TODO_DESCRIPTION);
             }
         case AddDeadlineCommand.COMMAND_WORD:
             try {
@@ -69,18 +75,18 @@ public class Parser {
     private Command prepareAddDeadlineCommand(String args) {
         String[] parts = args.split("/by");
         try {
-            return new AddDeadlineCommand(parts[0].trim(),parts[1].trim());
+            return new AddDeadlineCommand(parts[0].trim(), parts[1].trim());
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new IncorrectCommand(MESSAGE_MISSING_TIMING_DESCRIPTION+"/by.");
+            return new IncorrectCommand(MESSAGE_MISSING_TIMING_DESCRIPTION + "/by.");
         }
     }
 
     private Command prepareAddEventCommand(String args) {
         String[] parts = args.split("/at");
         try {
-            return new AddEventCommand(parts[0].trim(),parts[1].trim());
+            return new AddEventCommand(parts[0].trim(), parts[1].trim());
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new IncorrectCommand(MESSAGE_MISSING_TIMING_DESCRIPTION+"/at.");
+            return new IncorrectCommand(MESSAGE_MISSING_TIMING_DESCRIPTION + "/at.");
         }
     }
 
