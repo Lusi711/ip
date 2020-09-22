@@ -8,16 +8,31 @@ import duke.ui.Ui;
 import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
 import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
 
+/**
+ * Deletes a task identified using its last displayed index from the task list.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 
     private final int targetIndex;
 
-    public DeleteCommand(int args) {
-        targetIndex = args - 1;
+    /**
+     * Sets up the index of the task to delete
+     *
+     * @param index index of the task to delete
+     */
+    public DeleteCommand(int index) {
+        targetIndex = index - 1;
     }
 
+    /**
+     * Deletes a task identified using its last displayed index and prints a confirmatory message
+     *
+     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param ui      the interface that interacts with the user
+     * @param storage the file used to store task list data
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task deletedTask;

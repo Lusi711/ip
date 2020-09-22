@@ -22,7 +22,16 @@ import static duke.ui.Messages.MESSAGE_MISSING_TODO_DESCRIPTION;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     */
     public Command parse(String userInput) {
         String[] command = userInput.trim().split(" ", 2);
 
@@ -78,6 +87,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the add deadline command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareAddDeadlineCommand(String args) {
         String[] parts = args.split("/by");
         try {
@@ -89,6 +104,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the add event command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareAddEventCommand(String args) {
         String[] parts = args.split("/at");
         try {
@@ -100,20 +121,44 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses arguments in the context of the delete task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareDelete(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DeleteCommand(targetIndex);
     }
 
+    /**
+     * Parses arguments in the context of the done task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareDone(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DoneCommand(targetIndex);
     }
 
+    /**
+     * Parses arguments in the context of find task command based on description.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareFind(String args) {
         return new FindCommand(args);
     }
 
+    /**
+     * Parses arguments in the context of find task command based on date.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareFindDate(String args) {
         return new FindDateCommand(args.trim());
     }
