@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 
+import static duke.ui.Messages.MESSAGE_DISPLAY_LIST;
 import static duke.ui.Messages.MESSAGE_GOODBYE;
 import static duke.ui.Messages.MESSAGE_ENQUIRY;
 import static duke.ui.Messages.MESSAGE_WELCOME;
@@ -11,7 +12,11 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
+
     private static final String DIVIDER = "------------------------------------------------------------------";
 
     private static final String LOGO = " ____        _        \n"
@@ -32,18 +37,32 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * Reads the text entered by the user.
+     *
+     * @return command (full line) entered by the user
+     */
     public String readCommand() {
         return in.nextLine().trim();
     }
 
+    /**
+     * Generates and prints the welcome message upon the start of the application
+     */
     public void showWelcomeMessage() {
         showToUser(DIVIDER, "Hello from", LOGO, MESSAGE_WELCOME, MESSAGE_ENQUIRY, DIVIDER);
     }
 
+    /**
+     * Generates and prints the goodbye message upon termination of the application
+     */
     public void showGoodbyeMessage() {
         showToUser(DIVIDER, MESSAGE_GOODBYE, DIVIDER);
     }
 
+    /**
+     * Generates and prints all {@code Task} in the given {@code ArrayList<Task>}
+     */
     public void showTaskList(String message, ArrayList<Task> tasks) {
         showToUser(message);
 
@@ -53,14 +72,23 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints feedback message to the user
+     */
     public void showFeedbackMessage(String... feedbackToUser) {
         showToUser(feedbackToUser);
     }
 
+    /**
+     * Prints divider to distinguish input and different outputs
+     */
     public void showLine() {
         showToUser(DIVIDER);
     }
 
+    /**
+     * Shows message(s) to the user
+     */
     private void showToUser(String... message) {
         for (String m : message) {
             out.println(m);
