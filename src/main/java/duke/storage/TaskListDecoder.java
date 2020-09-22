@@ -51,7 +51,6 @@ public class TaskListDecoder {
         String[] parts = description.split(regex);
         LocalDateTime by = LocalDateTime.parse(parts[1].trim(), DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
         Task deadline = new Deadline(parts[0].trim(), by.format(DateTimeFormatter.ofPattern("yyyy-MM-d HHmm")));
-
         if (isDone.contains(CHECKMARK)) {
             deadline.markAsDone();
         }

@@ -25,6 +25,7 @@ public class Event extends Task {
         return at.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
     }
 
+    @Override
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + formatTimeToString();
     }

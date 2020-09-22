@@ -5,13 +5,12 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindDateCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.command.addTask.AddDeadlineCommand;
 import duke.command.addTask.AddEventCommand;
 import duke.command.addTask.AddToDoCommand;
-
-import java.time.format.DateTimeParseException;
 
 import static duke.ui.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static duke.ui.Messages.MESSAGE_INVALID_TIMING_DESCRIPTION;
@@ -20,6 +19,8 @@ import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
 import static duke.ui.Messages.MESSAGE_MISSING_EVENT_DESCRIPTION;
 import static duke.ui.Messages.MESSAGE_MISSING_TIMING_DESCRIPTION;
 import static duke.ui.Messages.MESSAGE_MISSING_TODO_DESCRIPTION;
+
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public Command parse(String userInput) {
@@ -44,34 +45,40 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 return new IncorrectCommand(MESSAGE_MISSING_EVENT_DESCRIPTION);
             }
-        case DoneCommand.COMMAND_WORD:
-            try {
-                return prepareDone(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-        case FindDateCommand.COMMAND_WORD:
-            try {
-                return prepareFindDate(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
         case DeleteCommand.COMMAND_WORD:
             try {
                 return prepareDelete(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
                 return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
+        case DoneCommand.COMMAND_WORD:
+            try {
+                return prepareDone(command[1].trim());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+            }
+        case FindCommand.COMMAND_WORD:
+            try {
+                return prepareFind(command[1].trim());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+            }
+        case FindDateCommand.COMMAND_WORD:
+            try {
+                return prepareFindDate(command[1].trim());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+            }
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         default:
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
-    public Command prepareAddDeadlineCommand(String args) {
+    private Command prepareAddDeadlineCommand(String args) {
         String[] parts = args.split("/by");
         try {
             return new AddDeadlineCommand(parts[0].trim(), parts[1].trim());
@@ -82,7 +89,7 @@ public class Parser {
         }
     }
 
-    public Command prepareAddEventCommand(String args) {
+    private Command prepareAddEventCommand(String args) {
         String[] parts = args.split("/at");
         try {
             return new AddEventCommand(parts[0].trim(), parts[1].trim());
@@ -93,14 +100,18 @@ public class Parser {
         }
     }
 
-    public Command prepareDelete(String args) {
+    private Command prepareDelete(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DeleteCommand(targetIndex);
     }
 
-    public Command prepareDone(String args) {
+    private Command prepareDone(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DoneCommand(targetIndex);
+    }
+
+    private Command prepareFind(String args) {
+        return new FindCommand(args);
     }
 
     private Command prepareFindDate(String args) {

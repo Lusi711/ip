@@ -2,14 +2,14 @@ package duke.ui;
 
 import duke.task.Task;
 
+import static duke.ui.Messages.MESSAGE_GOODBYE;
+import static duke.ui.Messages.MESSAGE_ENQUIRY;
+import static duke.ui.Messages.MESSAGE_WELCOME;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static duke.ui.Messages.MESSAGE_GOODBYE;
-import static duke.ui.Messages.MESSAGE_ENQUIRY;
-import static duke.ui.Messages.MESSAGE_WELCOME;
 
 public class Ui {
     private static final String DIVIDER = "------------------------------------------------------------------";
@@ -37,7 +37,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        showToUser(DIVIDER, MESSAGE_WELCOME, LOGO, MESSAGE_ENQUIRY, DIVIDER);
+        showToUser(DIVIDER, "Hello from", LOGO, MESSAGE_WELCOME, MESSAGE_ENQUIRY, DIVIDER);
     }
 
     public void showGoodbyeMessage() {
