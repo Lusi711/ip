@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
     /**
      * Saves the data from the task list into a storage file
      *
-     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param tasks   the TaskList that stores all the tasks
      * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */

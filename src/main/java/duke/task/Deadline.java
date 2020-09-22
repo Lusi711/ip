@@ -37,7 +37,9 @@ public class Deadline extends Task {
     private String formatTimeToString() {
         return by.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
     }
-
+    /**
+     * Converts the object to an encoded, readable string format
+     */
     @Override
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + formatTimeToString();
