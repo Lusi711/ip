@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task that has no specific deadline
+ */
 public class ToDo extends Task {
 
     private static final String DESCRIPTOR = "[T]";

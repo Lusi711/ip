@@ -7,7 +7,16 @@ import duke.command.addTask.AddToDoCommand;
 
 import static duke.ui.Messages.*;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput full user input string
+     * @return the command based on the user input
+     */
     public Command parse(String userInput) {
         String[] command = userInput.trim().split(" ", 2);
         if (command.length == 0) {
@@ -54,7 +63,13 @@ public class Parser {
         }
     }
 
-    public Command prepareAddDeadlineCommand(String args) {
+    /**
+     * Parses arguments in the context of the add deadline command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareAddDeadlineCommand(String args) {
         String[] parts = args.split("/by");
         try {
             return new AddDeadlineCommand(parts[0].trim(),parts[1].trim());
@@ -63,7 +78,13 @@ public class Parser {
         }
     }
 
-    public Command prepareAddEventCommand(String args) {
+    /**
+     * Parses arguments in the context of the add event command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareAddEventCommand(String args) {
         String[] parts = args.split("/at");
         try {
             return new AddEventCommand(parts[0].trim(),parts[1].trim());
@@ -72,12 +93,24 @@ public class Parser {
         }
     }
 
-    public Command prepareDeleteCommand(String args) {
+    /**
+     * Parses arguments in the context of the delete task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDeleteCommand(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DeleteCommand(targetIndex);
     }
 
-    public Command prepareDoneCommand(String args) {
+    /**
+     * Parses arguments in the context of the done task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDoneCommand(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DoneCommand(targetIndex);
     }
