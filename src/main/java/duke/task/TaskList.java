@@ -1,11 +1,6 @@
 package duke.task;
 
-import duke.ui.Ui;
-
 import java.util.ArrayList;
-
-import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
-import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
 
 public class TaskList {
     private ArrayList<Task> tasks;

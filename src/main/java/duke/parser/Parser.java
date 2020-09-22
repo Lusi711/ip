@@ -5,7 +5,13 @@ import duke.command.addTask.AddDeadlineCommand;
 import duke.command.addTask.AddEventCommand;
 import duke.command.addTask.AddToDoCommand;
 
-import static duke.ui.Messages.*;
+import static duke.ui.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static duke.ui.Messages.MESSAGE_MISSING_COMMAND_FORMAT;
+import static duke.ui.Messages.MESSAGE_MISSING_DEADLINE_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_EVENT_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_TIMING_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_TODO_DESCRIPTION;
 
 public class Parser {
     public Command parse(String userInput) {
@@ -39,13 +45,19 @@ public class Parser {
             try {
                 return prepareDoneCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_INDEX);
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
                 return prepareDeleteCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_INDEX);
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+            }
+        case FindCommand.COMMAND_WORD:
+            try {
+                return prepareFindCommand(command[1].trim());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -54,7 +66,7 @@ public class Parser {
         }
     }
 
-    public Command prepareAddDeadlineCommand(String args) {
+    private Command prepareAddDeadlineCommand(String args) {
         String[] parts = args.split("/by");
         try {
             return new AddDeadlineCommand(parts[0].trim(),parts[1].trim());
@@ -63,7 +75,7 @@ public class Parser {
         }
     }
 
-    public Command prepareAddEventCommand(String args) {
+    private Command prepareAddEventCommand(String args) {
         String[] parts = args.split("/at");
         try {
             return new AddEventCommand(parts[0].trim(),parts[1].trim());
@@ -72,13 +84,17 @@ public class Parser {
         }
     }
 
-    public Command prepareDeleteCommand(String args) {
+    private Command prepareDeleteCommand(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DeleteCommand(targetIndex);
     }
 
-    public Command prepareDoneCommand(String args) {
+    private Command prepareDoneCommand(String args) {
         int targetIndex = Integer.parseInt(args);
         return new DoneCommand(targetIndex);
+    }
+
+    private Command prepareFindCommand(String keyword) {
+        return new FindCommand(keyword);
     }
 }

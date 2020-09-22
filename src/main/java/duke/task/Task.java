@@ -13,6 +13,14 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDescriptor() {
+        return null;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
@@ -25,7 +33,5 @@ public class Task {
     public String encodeToFile() {
         return getStatusIcon() + " " + description;
     }
-    public String getDescriptor() {
-        return null;
-    }
+
 }

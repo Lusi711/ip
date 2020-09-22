@@ -38,15 +38,15 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        showToUser(DIVIDER, MESSAGE_WELCOME, LOGO, MESSAGE_ENQUIRY, DIVIDER);
+        showToUser(DIVIDER, "Hello from", LOGO, MESSAGE_WELCOME, MESSAGE_ENQUIRY, DIVIDER);
     }
 
     public void showGoodbyeMessage() {
         showToUser(DIVIDER, MESSAGE_GOODBYE, DIVIDER);
     }
 
-    public void showTaskList(ArrayList<Task> tasks) {
-        showToUser(MESSAGE_DISPLAY_LIST);
+    public void showTaskList(String message, ArrayList<Task> tasks) {
+        showToUser(message);
 
         for (Task task : tasks) {
             int taskIndex = tasks.indexOf(task) + 1;

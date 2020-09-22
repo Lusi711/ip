@@ -1,11 +1,8 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 import static duke.ui.Messages.MESSAGE_DISPLAY_LIST;
 
@@ -14,6 +11,6 @@ public class ListCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks.getTasks());
+        ui.showTaskList(MESSAGE_DISPLAY_LIST, tasks.getTasks());
     }
 }
