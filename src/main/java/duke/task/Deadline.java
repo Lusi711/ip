@@ -13,10 +13,6 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
     }
 
-    public String getDescriptor() {
-        return DESCRIPTOR;
-    }
-
     public LocalDateTime getBy() {
         return by;
     }

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 
-    private int targetIndex;
+    private final int targetIndex;
 
     public DeleteCommand(int args) {
         targetIndex = args - 1;

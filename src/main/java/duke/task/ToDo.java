@@ -17,8 +17,4 @@ public class ToDo extends Task {
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile();
     }
-
-    public String getDescriptor() {
-        return DESCRIPTOR;
-    }
 }

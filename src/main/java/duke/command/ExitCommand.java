@@ -6,7 +6,6 @@ import duke.ui.Ui;
 
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
-    private static final String MESSAGE_IOEXCEPTION = "Something went wrong.";
 
     public ExitCommand() {
         this.isExit = true;

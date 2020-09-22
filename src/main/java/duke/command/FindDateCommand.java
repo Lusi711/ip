@@ -15,7 +15,7 @@ import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
 public class FindDateCommand extends Command {
     public static final String COMMAND_WORD = "date";
 
-    private String date;
+    private final String date;
 
     public FindDateCommand(String date) {
         this.date = date;
@@ -24,7 +24,7 @@ public class FindDateCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> tasksFound = getTasksWithTimeEqualsDate(tasks, date);
-        ui.showTaskList(MESSAGE_TASKS_LISTED,tasksFound);
+        ui.showTaskList(MESSAGE_TASKS_LISTED, tasksFound);
     }
 
     private ArrayList<Task> getTasksWithTimeEqualsDate(TaskList tasks, String date) {

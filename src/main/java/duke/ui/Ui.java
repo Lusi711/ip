@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static duke.ui.Messages.MESSAGE_GOODBYE;
-import static duke.ui.Messages.MESSAGE_DISPLAY_LIST;
 import static duke.ui.Messages.MESSAGE_ENQUIRY;
 import static duke.ui.Messages.MESSAGE_WELCOME;
 
@@ -34,9 +33,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        String fullInputLine = in.nextLine().trim();
-
-        return fullInputLine;
+        return in.nextLine().trim();
     }
 
     public void showWelcomeMessage() {

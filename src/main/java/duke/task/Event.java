@@ -12,10 +12,6 @@ public class Event extends Task {
         this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
     }
 
-    public String getDescriptor() {
-        return DESCRIPTOR;
-    }
-
     public LocalDateTime getAt() {
         return at;
     }

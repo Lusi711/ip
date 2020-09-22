@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:";
 
-    private int targetIndex;
+    private final int targetIndex;
 
     public DoneCommand(int args) {
         targetIndex = args - 1;
