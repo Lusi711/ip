@@ -7,7 +7,7 @@ import duke.ui.Ui;
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
-public class IncorrectCommand extends Command{
+public class IncorrectCommand extends Command {
     public final String feedbackToUser;
 
     /**
@@ -22,8 +22,8 @@ public class IncorrectCommand extends Command{
     /**
      * Prints the feedback message based on the type of error in the command
      *
-     * @param tasks the TaskList that stores the tasks input by the user
-     * @param ui the interface that interacts with the user
+     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
     @Override

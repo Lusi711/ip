@@ -25,7 +25,9 @@ public class Deadline extends Task {
         return DESCRIPTOR + super.toString() + " (by: " + by + ")";
     }
 
-    /** Converts the object to an encoded, readable string format */
+    /**
+     * Converts the object to an encoded, readable string format
+     */
     public String encodeToFile() {
         return DESCRIPTOR + super.encodeToFile() + " | " + by;
     }

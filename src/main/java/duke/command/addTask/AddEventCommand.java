@@ -2,7 +2,6 @@ package duke.command.addTask;
 
 import duke.command.Command;
 import duke.storage.Storage;
-import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -20,26 +19,26 @@ public class AddEventCommand extends Command {
      * Class constructor to set up an event
      *
      * @param description description of the event
-     * @param at start time of the event
+     * @param at          start time of the event
      */
     public AddEventCommand(String description, String at) {
-        this.toAdd = new Event(description,at);
+        this.toAdd = new Event(description, at);
     }
 
     /**
      * Adds an event to the task list and prints a confirmatory message
      *
-     * @param tasks the TaskList that stores the tasks input by the user
-     * @param ui the interface that interacts with the user
+     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(toAdd);
         int numberOfTasks = tasks.getNumberOfTasks();
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  "+toAdd);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + toAdd);
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("Now you have "+numberOfTasks+" task in the list.");
+            ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
         } else {
             ui.showFeedbackMessage("Now you have " + numberOfTasks + " tasks in the list.");
         }

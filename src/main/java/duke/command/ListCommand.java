@@ -1,13 +1,8 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
-
-import static duke.ui.Messages.MESSAGE_DISPLAY_LIST;
 
 /**
  * Lists all tasks in the task list to the user.

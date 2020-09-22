@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -40,22 +39,26 @@ public class Ui {
      * @return command (full line) entered by the user
      */
     public String readCommand() {
-        String fullInputLine = in.nextLine().trim();
-
-        return fullInputLine;
+        return in.nextLine().trim();
     }
 
-    /** Generates and prints the welcome message upon the start of the application */
+    /**
+     * Generates and prints the welcome message upon the start of the application
+     */
     public void showWelcomeMessage() {
         showToUser(DIVIDER, MESSAGE_WELCOME, LOGO, MESSAGE_ENQUIRY, DIVIDER);
     }
 
-    /** Generates and prints the goodbye message upon termination of the application */
+    /**
+     * Generates and prints the goodbye message upon termination of the application
+     */
     public void showGoodbyeMessage() {
         showToUser(DIVIDER, MESSAGE_GOODBYE, DIVIDER);
     }
 
-    /** Generates and prints all {@code Task} in the given {@code ArrayList<Task>} */
+    /**
+     * Generates and prints all {@code Task} in the given {@code ArrayList<Task>}
+     */
     public void showTaskList(ArrayList<Task> tasks) {
         showToUser(MESSAGE_DISPLAY_LIST);
 
@@ -65,17 +68,23 @@ public class Ui {
         }
     }
 
-    /** Prints feedback message to the user */
+    /**
+     * Prints feedback message to the user
+     */
     public void showFeedbackMessage(String... feedbackToUser) {
         showToUser(feedbackToUser);
     }
 
-    /** Prints divider to distinguish input and different outputs */
+    /**
+     * Prints divider to distinguish input and different outputs
+     */
     public void showLine() {
         showToUser(DIVIDER);
     }
 
-    /** Shows message(s) to the user */
+    /**
+     * Shows message(s) to the user
+     */
     private void showToUser(String... message) {
         for (String m : message) {
             out.println(m);

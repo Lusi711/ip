@@ -27,17 +27,17 @@ public class AddToDoCommand extends Command {
     /**
      * Adds a task to the task list and prints a confirmatory message
      *
-     * @param tasks the TaskList that stores the tasks input by the user
-     * @param ui the interface that interacts with the user
+     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(toAdd);
         int numberOfTasks = tasks.getNumberOfTasks();
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  "+toAdd);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + toAdd);
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("Now you have "+numberOfTasks+" task in the list.");
+            ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
         } else {
             ui.showFeedbackMessage("Now you have " + numberOfTasks + " tasks in the list.");
         }

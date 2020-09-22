@@ -4,25 +4,22 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
-    private static final String MESSAGE_IOEXCEPTION = "Something went wrong.";
 
     /**
      * Saves the data from the task list into a storage file
      *
-     * @param tasks the TaskList that stores the tasks input by the user
-     * @param ui the interface that interacts with the user
+     * @param tasks   the TaskList that stores the tasks input by the user
+     * @param ui      the interface that interacts with the user
      * @param storage the file used to store task list data
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.save(tasks,ui);
+        storage.save(tasks, ui);
     }
 
     /**

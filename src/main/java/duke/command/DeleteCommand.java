@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
 
-    private int targetIndex;
+    private final int targetIndex;
 
     /**
      * Sets up the index of the task to delete

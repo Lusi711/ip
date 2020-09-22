@@ -23,21 +23,19 @@ public class TaskListDecoder {
      * Decodes sentence strings in file into a {@code ArrayList<Task>} containing the decoded tasks
      *
      * @param s the Scanner object which parses strings from the file
-     *
      * @return {@code ArrayList<Task>} data decoded from this file
-     *
      * @throws DukeException if there were errors reading and/or converting data from file.
      */
     public static ArrayList<Task> decodeTaskList(Scanner s) throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
-            String[] parts = s.nextLine().split("] ",2);
+            String[] parts = s.nextLine().split("] ", 2);
             if (parts[0].startsWith(TODO_DESCRIPTOR)) {
-                tasks.add(decodeToDoFromString(parts[0].trim(),parts[1].trim()));
+                tasks.add(decodeToDoFromString(parts[0].trim(), parts[1].trim()));
             } else if (parts[0].startsWith(DEADLINE_DESCRIPTOR)) {
-                tasks.add(decodeDeadlineFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeDeadlineFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else if (parts[0].startsWith(EVENT_DESCRIPTOR)) {
-                tasks.add(decodeEventFromString(parts[0].trim(),parts[1].trim(),"\\| "));
+                tasks.add(decodeEventFromString(parts[0].trim(), parts[1].trim(), "\\| "));
             } else {
                 throw new DukeException();
             }
@@ -46,17 +44,17 @@ public class TaskListDecoder {
         return tasks;
     }
 
-    /** Decodes a string into an {@code Event} if indicated
+    /**
+     * Decodes a string into an {@code Event} if indicated
      *
-     * @param isDone string that represents whether the task was done
+     * @param isDone      string that represents whether the task was done
      * @param description description of the event with the start time
-     * @param regex delimiter between text description and start time
-     *
+     * @param regex       delimiter between text description and start time
      * @return {@code Event} object created from string
      */
     private static Task decodeEventFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        Task event = new Event(parts[0].trim(),parts[1].trim());
+        Task event = new Event(parts[0].trim(), parts[1].trim());
         if (isDone.contains(CHECKMARK)) {
             event.markAsDone();
         }
@@ -67,15 +65,14 @@ public class TaskListDecoder {
     /**
      * Decodes a string into a {@code Deadline} if indicated
      *
-     * @param isDone string that represents whether the task was done
+     * @param isDone      string that represents whether the task was done
      * @param description description of the task with the deadline
-     * @param regex delimiter between text description and deadline
-     *
+     * @param regex       delimiter between text description and deadline
      * @return {@code Deadline} object created from string
      */
     private static Task decodeDeadlineFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        Task deadline = new Deadline(parts[0].trim(),parts[1].trim());
+        Task deadline = new Deadline(parts[0].trim(), parts[1].trim());
         if (isDone.contains(CHECKMARK)) {
             deadline.markAsDone();
         }
@@ -86,9 +83,8 @@ public class TaskListDecoder {
     /**
      * Decodes a string into a {@code ToDo} object if indicated
      *
-     * @param isDone string that represents whether the task was done
+     * @param isDone      string that represents whether the task was done
      * @param description description of the task
-     *
      * @return {@code ToDo} object created from string
      */
     private static Task decodeToDoFromString(String isDone, String description) {

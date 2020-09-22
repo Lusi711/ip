@@ -33,7 +33,7 @@ public class Duke {
     /**
      * Class constructor to set up the required objects and loads up the data from the storage file
      *
-     * @param filePath the file path of the saved copy of the tasklist
+     * @param filePath the file path of the saved copy of the task list
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -54,27 +54,34 @@ public class Duke {
         }
     }
 
-    /** Runs the program until termination.  */
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
-    /** Prints welcome message */
+    /**
+     * Prints welcome message
+     */
     private void start() {
         ui.showWelcomeMessage();
     }
 
-    /** Prints the Goodbye message and exits. */
+    /**
+     * Prints the Goodbye message and exits.
+     */
     private void exit() {
         ui.showGoodbyeMessage();
         System.exit(0);
     }
 
-    /** Reads the user command and executes it, until the user issues the exit command.  */
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
     private void runCommandLoopUntilExitCommand() {
-        Command command;
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();

@@ -21,23 +21,25 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
-    /** Marks the task as done */
+    /**
+     * Marks the task as done
+     */
     public void markAsDone() {
         isDone = true;
     }
 
-    /** Converts the object to a presentable string format */
+    /**
+     * Converts the object to a presentable string format
+     */
     @Override
     public String toString() {
         return getStatusIcon() + " " + description;
     }
 
-    /** Converts the object to an encoded, readable string format */
+    /**
+     * Converts the object to an encoded, readable string format
+     */
     public String encodeToFile() {
         return getStatusIcon() + " " + description;
-    }
-
-    public String getDescriptor() {
-        return null;
     }
 }

@@ -11,7 +11,7 @@ public class Event extends Task {
      * Constructor that sets up the text description and start time of the event
      *
      * @param description text description of event
-     * @param at start time of event
+     * @param at          start time of event
      */
     public Event(String description, String at) {
         super(description);
