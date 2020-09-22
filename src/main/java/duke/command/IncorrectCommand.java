@@ -4,7 +4,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class IncorrectCommand extends Command{
+public class IncorrectCommand extends Command {
     public final String feedbackToUser;
 
     public IncorrectCommand(String feedbackToUser) {
