@@ -21,6 +21,9 @@ public class TaskListDecoder {
     private static final String DEADLINE_DESCRIPTOR = "[D]";
     private static final String EVENT_DESCRIPTOR = "[E]";
 
+    private static final String DATETIME_ENCODED_FORMAT = "MMM d yyyy, h:mm a";
+    private static final String DATETIME_INPUT_FORMAT = "yyyy-MM-d HHmm";
+
     /**
      * Decodes sentence strings in file into a {@code ArrayList<Task>} containing the decoded tasks
      *
@@ -56,8 +59,8 @@ public class TaskListDecoder {
      */
     private static Task decodeEventFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        LocalDateTime by = LocalDateTime.parse(parts[1].trim(), DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
-        Task event = new Event(parts[0].trim(), by.format(DateTimeFormatter.ofPattern("yyyy-MM-d HHmm")));
+        LocalDateTime by = LocalDateTime.parse(parts[1].trim(), DateTimeFormatter.ofPattern(DATETIME_ENCODED_FORMAT));
+        Task event = new Event(parts[0].trim(), by.format(DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT)));
         if (isDone.contains(CHECKMARK)) {
             event.markAsDone();
         }
@@ -75,8 +78,8 @@ public class TaskListDecoder {
      */
     private static Task decodeDeadlineFromString(String isDone, String description, String regex) {
         String[] parts = description.split(regex);
-        LocalDateTime by = LocalDateTime.parse(parts[1].trim(), DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
-        Task deadline = new Deadline(parts[0].trim(), by.format(DateTimeFormatter.ofPattern("yyyy-MM-d HHmm")));
+        LocalDateTime by = LocalDateTime.parse(parts[1].trim(), DateTimeFormatter.ofPattern(DATETIME_ENCODED_FORMAT));
+        Task deadline = new Deadline(parts[0].trim(), by.format(DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT)));
         if (isDone.contains(CHECKMARK)) {
             deadline.markAsDone();
         }

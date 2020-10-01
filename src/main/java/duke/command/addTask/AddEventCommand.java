@@ -35,8 +35,8 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addNewTask(toAdd);
         int numberOfTasks = tasks.getNumberOfTasks();
+        tasks.addNewTask(toAdd);
         ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t  " + toAdd);
         if (numberOfTasks == 1) {
             ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " task in the list.");

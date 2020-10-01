@@ -33,55 +33,33 @@ public class Parser {
     public Command parse(String userInput) {
         String[] command = userInput.trim().split(" ", 2);
 
-        switch (command[0]) {
-        case AddToDoCommand.COMMAND_WORD:
-            try {
-                return new AddToDoCommand(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case AddDeadlineCommand.COMMAND_WORD:
-            try {
-                return prepareAddDeadlineCommand(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case AddEventCommand.COMMAND_WORD:
-            try {
-                return prepareAddEventCommand(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case DeleteCommand.COMMAND_WORD:
-            try {
-                return prepareDelete(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case DoneCommand.COMMAND_WORD:
-            try {
-                return prepareDone(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case FindCommand.COMMAND_WORD:
-            try {
-                return prepareFind(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case FindDateCommand.COMMAND_WORD:
-            try {
-                return prepareFindDate(command[1].trim());
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
-            }
-        case ListCommand.COMMAND_WORD:
+        if (command[0].equals(ListCommand.COMMAND_WORD)) {
             return new ListCommand();
-        case ExitCommand.COMMAND_WORD:
+        } else if (command[0].equals(ExitCommand.COMMAND_WORD)) {
             return new ExitCommand();
-        default:
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+
+        try {
+            switch (command[0]) {
+            case AddToDoCommand.COMMAND_WORD:
+                return new AddToDoCommand(command[1].trim());
+            case AddDeadlineCommand.COMMAND_WORD:
+                return prepareAddDeadlineCommand(command[1].trim());
+            case AddEventCommand.COMMAND_WORD:
+                return prepareAddEventCommand(command[1].trim());
+            case DeleteCommand.COMMAND_WORD:
+                return prepareDelete(command[1].trim());
+            case DoneCommand.COMMAND_WORD:
+                return prepareDone(command[1].trim());
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(command[1].trim());
+            case FindDateCommand.COMMAND_WORD:
+                return prepareFindDate(command[1].trim());
+            default:
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+        } catch (ArrayIndexOutOfBoundsException abe) {
+            return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
         }
     }
 

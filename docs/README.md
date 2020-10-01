@@ -140,14 +140,14 @@ Format: `find <KEYWORD>`
 ------------------------------------------------------------------
 ```
 
-## 3.7. Finding tasks by date: `get`
-Find tasks with description that matches the given date.
+## 3.7. Viewing tasks by date: `view`
+Find deadlines/events that are due/occur on the given date.
 Format: `get <DATE>`
 * Searches for tasks with deadline/start time which matches the specified `DATE`.
 * `DATE` must be in the format : `YYYY-MM-DD` e.g. `2020-09-28` means 28th September 2020.
 > Example
 ```
->>> date 2020-08-06
+>>> view 2020-08-06
 ------------------------------------------------------------------
     Here are the matching tasks in your list:
     1. [E][✘] project meeting (at: Aug 6 2020, 02:00 PM)
@@ -189,7 +189,7 @@ Add event | `event DESCRIPTION \by DATE TIME`
 List | `list`
 Mark as done | `done INDEX`
 Find by keyword | `find KEYWORD`
-Find by date | `date DATE`
+Find by date | `view DATE`
 Delete | `delete`
 Exit | `bye`
 
@@ -202,6 +202,7 @@ A. The console of your Computer does not support the Code Page.
 1. Type `chcp 65001` whenever you open a new command window to run the app.
 2. Type `java -Dfile.encoding=UTF-8 -jar ip.jar` whenever you start the application.
 
+The table below shows the possible error messages you may see, the possible reasons and ways to deal with them.
 Message | Possible reason | What to do now
 ------- | --------------- | --------------
 ```OOPS!!! I'm sorry, but I don't know what that means :-(``` | You typed a command that does not exist in features. | Refer to [Features](#3-features) to learn the proper formatting.

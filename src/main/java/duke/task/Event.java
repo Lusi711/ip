@@ -10,6 +10,8 @@ public class Event extends Task {
 
     protected LocalDateTime at;
     private static final String DESCRIPTOR = "[E]";
+    private static final String DATETIME_INPUT_FORMAT = "yyyy-MM-d HHmm";
+    private static final String DATETIME_ENCODED_FORMAT = "MMM d yyyy, h:mm a";
 
     /**
      * Constructor that sets up the text description and start time of the event
@@ -19,7 +21,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
     }
 
     public LocalDateTime getAt() {
@@ -35,7 +37,7 @@ public class Event extends Task {
      * Converts the deadline to a presentable string format
      */
     private String formatTimeToString() {
-        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
+        return at.format(DateTimeFormatter.ofPattern(DATETIME_ENCODED_FORMAT));
     }
 
     @Override

@@ -5,6 +5,8 @@ package duke.task;
  */
 public class Task {
 
+    protected String TICK = "[\u2713]";
+    protected String CROSS = "[\u2718]";
     protected String description;
     protected boolean isDone;
 
@@ -19,7 +21,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
+        return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
     public String getDescription() {

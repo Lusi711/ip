@@ -17,8 +17,8 @@ import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
  */
 public class FindDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "get";
-
+    public static final String COMMAND_WORD = "view";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private final String date;
 
     /**
@@ -55,9 +55,9 @@ public class FindDateCommand extends Command {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task : tasks.getTasks()) {
             if (task instanceof Deadline) {
-                formattedTime = ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                formattedTime = ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
             } else if (task instanceof Event) {
-                formattedTime = ((Event) task).getAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                formattedTime = ((Event) task).getAt().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
             } else {
                 continue;
             }

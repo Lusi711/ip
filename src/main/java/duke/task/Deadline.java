@@ -10,6 +10,8 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
     private static final String DESCRIPTOR = "[D]";
+    private static final String DATETIME_INPUT_FORMAT = "yyyy-MM-d HHmm";
+    private static final String DATETIME_ENCODED_FORMAT = "MMM d yyyy, h:mm a";
 
     /**
      * Constructor that sets up the text description and deadline of the task
@@ -19,7 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-d HHmm"));
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_INPUT_FORMAT));
     }
 
     public LocalDateTime getBy() {
@@ -35,7 +37,7 @@ public class Deadline extends Task {
      * Converts the deadline to a presentable string format
      */
     private String formatTimeToString() {
-        return by.format(DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a"));
+        return by.format(DateTimeFormatter.ofPattern(DATETIME_ENCODED_FORMAT));
     }
     /**
      * Converts the object to an encoded, readable string format

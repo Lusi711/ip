@@ -36,17 +36,16 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task doneTask;
+        int numberOfTasks = tasks.getNumberOfTasks();
         try {
-            doneTask = tasks.markAsDone(targetIndex);
+            Task doneTask = tasks.markAsDone(targetIndex);
+            ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t " + doneTask);
         } catch (IndexOutOfBoundsException e) {
             if (tasks.getNumberOfTasks() > 0) {
-                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
+                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + numberOfTasks + ": " + (targetIndex + 1));
             } else {
                 ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
-            return;
         }
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t " + doneTask);
     }
 }
