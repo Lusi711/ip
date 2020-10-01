@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class Storage {
 
     private final String filePath;
-    private static final String MESSAGE_IOEXCEPTION = "Something went wrong.";
-    private static final String MESSAGE_MISSING_FILEPATH = "No file name is provided.";
+    private static final String MESSAGE_IOEXCEPTION = "\tSomething went wrong.";
+    private static final String MESSAGE_MISSING_FILEPATH = "\tNo file name is provided.";
 
     /**
      * Sets up the filepath for the storage file

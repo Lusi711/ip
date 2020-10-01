@@ -17,12 +17,11 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String DIVIDER = "------------------------------------------------------------------";
-
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " \t____        _        \n"
+            + "\t|  _ \\ _   _| | _____ \n"
+            + "\t| | | | | | | |/ / _ \\\n"
+            + "\t| |_| | |_| |   <  __/\n"
+            + "\t|____/ \\__,_|_|\\_\\___|\n";
 
     private final Scanner in;
     private final PrintStream out;
@@ -49,7 +48,7 @@ public class Ui {
      * Generates and prints the welcome message upon the start of the application
      */
     public void showWelcomeMessage() {
-        showToUser(DIVIDER, "Hello from", LOGO, MESSAGE_WELCOME, MESSAGE_ENQUIRY, DIVIDER);
+        showToUser(DIVIDER, "\tHello from", LOGO, MESSAGE_WELCOME, MESSAGE_ENQUIRY, DIVIDER);
     }
 
     /**
@@ -66,7 +65,7 @@ public class Ui {
         showToUser(message);
         for (Task task : tasks) {
             int taskIndex = tasks.indexOf(task) + 1;
-            showToUser(taskIndex + ". " + task);
+            showToUser("\t" + taskIndex + ". " + task);
         }
     }
 

@@ -17,7 +17,7 @@ import static duke.ui.Messages.MESSAGE_TASKS_LISTED;
  */
 public class FindDateCommand extends Command {
 
-    public static final String COMMAND_WORD = "date";
+    public static final String COMMAND_WORD = "get";
 
     private final String date;
 

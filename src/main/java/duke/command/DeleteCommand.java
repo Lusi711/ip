@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
-import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
 
 /**
  * Deletes a task identified using its last displayed index from the task list.
@@ -14,7 +14,7 @@ import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:";
+    public static final String MESSAGE_SUCCESS = "\tNoted. I've removed this task:";
 
     private final int targetIndex;
 
@@ -41,18 +41,18 @@ public class DeleteCommand extends Command {
             deletedTask = tasks.deleteTask(targetIndex);
         } catch (IndexOutOfBoundsException ioe) {
             if (tasks.getNumberOfTasks() > 0) {
-                ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
+                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
             } else {
                 ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
             return;
         }
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + deletedTask);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t  " + deletedTask);
         int numberOfTasks = tasks.getNumberOfTasks();
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
+            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " task in the list.");
         } else {
-            ui.showFeedbackMessage("Now you have " + numberOfTasks + " tasks in the list.");
+            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " tasks in the list.");
         }
     }
 }

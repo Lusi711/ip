@@ -14,11 +14,8 @@ import duke.command.addTask.AddToDoCommand;
 
 import static duke.ui.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static duke.ui.Messages.MESSAGE_INVALID_TIMING_DESCRIPTION;
-import static duke.ui.Messages.MESSAGE_MISSING_DEADLINE_DESCRIPTION;
 import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
-import static duke.ui.Messages.MESSAGE_MISSING_EVENT_DESCRIPTION;
 import static duke.ui.Messages.MESSAGE_MISSING_TIMING_DESCRIPTION;
-import static duke.ui.Messages.MESSAGE_MISSING_TODO_DESCRIPTION;
 
 import java.time.format.DateTimeParseException;
 
@@ -41,19 +38,19 @@ public class Parser {
             try {
                 return new AddToDoCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_TODO_DESCRIPTION);
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
         case AddDeadlineCommand.COMMAND_WORD:
             try {
                 return prepareAddDeadlineCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_DEADLINE_DESCRIPTION);
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
         case AddEventCommand.COMMAND_WORD:
             try {
                 return prepareAddEventCommand(command[1].trim());
             } catch (ArrayIndexOutOfBoundsException e) {
-                return new IncorrectCommand(MESSAGE_MISSING_EVENT_DESCRIPTION);
+                return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
             }
         case DeleteCommand.COMMAND_WORD:
             try {
@@ -129,8 +126,12 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
-        int targetIndex = Integer.parseInt(args);
-        return new DeleteCommand(targetIndex);
+        try {
+            int targetIndex = Integer.parseInt(args);
+            return new DeleteCommand(targetIndex);
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+        }
     }
 
     /**
@@ -140,8 +141,13 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDone(String args) {
-        int targetIndex = Integer.parseInt(args);
-        return new DoneCommand(targetIndex);
+        try {
+            int targetIndex = Integer.parseInt(args);
+            return new DoneCommand(targetIndex);
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(MESSAGE_MISSING_DESCRIPTION);
+        }
+
     }
 
     /**
@@ -151,7 +157,7 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareFind(String args) {
-        return new FindCommand(args);
+        return new FindCommand(args.trim().toLowerCase());
     }
 
     /**

@@ -67,6 +67,6 @@ public class FindCommand extends Command {
      * Retrieves a listing of every word in the description, in order.
      */
     private List<String> getWordsInDescription(String description) {
-        return Arrays.asList(description.split(" "));
+        return Arrays.asList(description.toLowerCase().split(" "));
     }
 }

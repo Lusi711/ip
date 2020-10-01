@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import static duke.ui.Messages.MESSAGE_EMPTY_LIST;
-import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
+import static duke.ui.Messages.MESSAGE_MISSING_INDEX;
 
 /**
  * Indicates a task identified using its last displayed index as done
@@ -14,7 +14,7 @@ import static duke.ui.Messages.MESSAGE_MISSING_DESCRIPTION;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
-    public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:";
+    public static final String MESSAGE_SUCCESS = "\tNice! I've marked this task as done:";
 
     private final int targetIndex;
 
@@ -41,12 +41,12 @@ public class DoneCommand extends Command {
             doneTask = tasks.markAsDone(targetIndex);
         } catch (IndexOutOfBoundsException e) {
             if (tasks.getNumberOfTasks() > 0) {
-                ui.showFeedbackMessage(MESSAGE_MISSING_DESCRIPTION + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
+                ui.showFeedbackMessage(MESSAGE_MISSING_INDEX + " between 1 and " + tasks.getNumberOfTasks() + ": " + (targetIndex + 1));
             } else {
                 ui.showFeedbackMessage(MESSAGE_EMPTY_LIST + COMMAND_WORD);
             }
             return;
         }
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, " " + doneTask);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t " + doneTask);
     }
 }

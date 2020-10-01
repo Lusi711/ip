@@ -12,7 +12,7 @@ import duke.ui.Ui;
 public class AddDeadlineCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";
-    public static final String MESSAGE_SUCCESS = "Got it. I've added this task:";
+    public static final String MESSAGE_SUCCESS = "\tGot it. I've added this task:";
 
     private final Deadline toAdd;
 
@@ -37,11 +37,11 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addNewTask(toAdd);
         int numberOfTasks = tasks.getNumberOfTasks();
-        ui.showFeedbackMessage(MESSAGE_SUCCESS, "  " + toAdd);
+        ui.showFeedbackMessage(MESSAGE_SUCCESS, "\t  " + toAdd);
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("Now you have " + numberOfTasks + " task in the list.");
+            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " task in the list.");
         } else {
-            ui.showFeedbackMessage("Now you have " + numberOfTasks + " tasks in the list.");
+            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " tasks in the list.");
         }
     }
 }
