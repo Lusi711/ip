@@ -203,7 +203,7 @@ A. The console of your Computer does not support the Code Page.
 1. Type `chcp 65001` to change the Code Page of the command line.
 2. Type `java -Dfile.encoding=UTF-8 -jar ip.jar` whenever you start the application.
 
-#6. Troubleshooting
+# 6. Troubleshooting
 The table below shows the possible error messages you may see, the possible reasons and ways to deal with them. <br>
 Message | Possible reason | What to do now
 ------- | --------------- | --------------
