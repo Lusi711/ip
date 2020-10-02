@@ -11,11 +11,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[3.4. Listing tasks](#34-listing-all-tasks-list) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.5. Marking a task as done](#35-marking-a-task-as-done-done) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.6. Finding tasks by keyword](#36-finding-tasks-by-keyword-find) <br>
-&nbsp;&nbsp;&nbsp;&nbsp;[3.7. Finding tasks by date](#37-finding-tasks-by-date-get) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[3.7. Viewing tasks on a date](#37-viewing-tasks-on-a-date-view) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.8. Deleting a task](#38-deleting-a-task-delete) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.9. Exiting the program](#39-exiting-the-program-bye) <br>
 [4. Command summary](#4-command-summary) <br>
-[5. Troubleshooting](#5-troubleshooting)
+[5. FAW](#5-faq)
+[6. Troubleshooting](#6-troubleshooting)
 
 # 1. Introduction
 
@@ -24,7 +25,7 @@ This user guide gives you detailed instructions on the Duke installation process
 
 # 2. Quick Start
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `ip.jar`.
+2. Download the latest `ip.jar` from [here](https://github.com/Lusi711/ip/releases/tag/v2%2C0).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke.
 4. Open a command window in that folder.
 5. Run the command `java -jar ip,jar` to start the app. 
@@ -41,8 +42,8 @@ This user guide gives you detailed instructions on the Duke installation process
     What can I do for you?
 ------------------------------------------------------------------
 ```
-5. Type the command below the separation line and press Enter to execute it.
-6. Refer to the [Features](#3-features) below for details of each command.
+7. Type the command below the separation line and press Enter to execute it.
+8. Refer to the [Features](#3-features) below for details of each command.
 
 # 3. Features 
 Notes about command format:
@@ -140,9 +141,9 @@ Format: `find <KEYWORD>`
 ------------------------------------------------------------------
 ```
 
-## 3.7. Viewing tasks by date: `view`
+## 3.7. Viewing tasks on a date: `view`
 Find deadlines/events that are due/occur on the given date.
-Format: `get <DATE>`
+Format: `view <DATE>`
 * Searches for tasks with deadline/start time which matches the specified `DATE`.
 * `DATE` must be in the format : `YYYY-MM-DD` e.g. `2020-09-28` means 28th September 2020.
 > Example
@@ -193,16 +194,17 @@ Find by date | `view DATE`
 Delete | `delete`
 Exit | `bye`
 
-# 5. Troubleshooting
+# 5. FAQ
 Q. The status icons of my tasks are not showing in the terminal. e.g. 
 ```
 [T][?] read book
 ```
 A. The console of your Computer does not support the Code Page. 
-1. Type `chcp 65001` whenever you open a new command window to run the app.
+1. Type `chcp 65001` to change the Code Page of the command line.
 2. Type `java -Dfile.encoding=UTF-8 -jar ip.jar` whenever you start the application.
 
-The table below shows the possible error messages you may see, the possible reasons and ways to deal with them.
+#6. Troubleshooting
+The table below shows the possible error messages you may see, the possible reasons and ways to deal with them. <br>
 Message | Possible reason | What to do now
 ------- | --------------- | --------------
 ```OOPS!!! I'm sorry, but I don't know what that means :-(``` | You typed a command that does not exist in features. | Refer to [Features](#3-features) to learn the proper formatting.
