@@ -15,7 +15,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;[3.8. Deleting a task](#38-deleting-a-task-delete) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[3.9. Exiting the program](#39-exiting-the-program-bye) <br>
 [4. Command summary](#4-command-summary) <br>
-[5. FAW](#5-faq)
+[5. FAQ](#5-faq) <br>
 [6. Troubleshooting](#6-troubleshooting)
 
 # 1. Introduction
