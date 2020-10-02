@@ -46,14 +46,14 @@ This user guide gives you detailed instructions on the Duke installation process
 8. Refer to the [Features](#3-features) below for details of each command.
 
 # 3. Features 
-Notes about command format:
-* Words in `<UPPER-CASE>` are the parameters supplied by the user. 
-e.g. in `todo <DESCRIPTION>`, `DESCRIPTION` is a parameter.
+This section describes and explains the available commands that can be input to Duke.
 
 ## 3.1. Adding ToDos - `todo`
 Adds a task without any date/time attached to it. <br>
 Format: `todo <DESCRIPTION>`
-* The task is assumed to be not done.
+* `<DESCRIPTION>` is a parameter for a string of text that describes the task
+* `<DESCRIPTION>` can consist of more than 1 word e.g. `eat`, `read book`, etc.
+* The task is not done by default.
 >Example
 ```
 >>> todo read book
@@ -67,8 +67,12 @@ Format: `todo <DESCRIPTION>`
 ## 3.2. Adding deadlines: `deadline`
 Adds a task that need to be done before a specific date and time. <br>
 Format: `deadline <DESCRIPTION> \by <DATE> <TIME>`
-* Enter `DATE` in the format: `YYYY-MM-DD`.
-* Enter `TIME` in the 24-hour format: `HHmm` e.g. 11:59 pm is expressed as `2359`.
+* `<DESCRIPTION>` is a parameter for a string of text that describes the task
+* `<DESCRIPTION>` can consist of more than 1 word e.g. `eat`, `return book`, etc.
+* `<DATE>` is a parameter for the deadline of the task.
+* `<DATE>` must be in the format: `YYYY-MM-DD` e.g. 6th June, 2020 is expressed as `2020-06-06`
+* `<TIME>` is a parameter for the time of the deadline
+* `<TIME>` must be in the 24-hour format: `hhmm` e.g. 11:59 pm is expressed as `2359`.
 
 >Example
 ```
@@ -83,8 +87,13 @@ Format: `deadline <DESCRIPTION> \by <DATE> <TIME>`
 ## 3.3. Adding events: `event`
 Adds a task that starts at a specific time. <br>
 Format: `event <DESCRIPTION> \by <DATE> <START_TIME>`
-* The `DATE` must be in the format: `YYYY-MM-DD'.
-* The `START_TIME` must be in the 24-hour format: `HHmm` e.g. 11:59 pm is expressed as `2359`.
+* `<DESCRIPTION>` is a parameter for a string of text that describes the event
+* `<DESCRIPTION>` can consist of more than 1 word e.g. `eat`, `project meeting`, etc.
+* `<DATE>` is a parameter for the date of the event.
+* `<DATE>` must be in the format: `YYYY-MM-DD` e.g. 6th August, 2020 is expressed as `2020-08-06`
+* `<START_TIME>` is a parameter for the start time of the event
+* `<START_TIME>` must be in the 24-hour format: `hhmm` e.g. 2:00 pm is expressed as `1400`.
+
 >Example
 ```
 >>> event project meeting /at 2020-08-06 1400
@@ -113,7 +122,7 @@ Format: `list`
 Marks a specified task as done. <br>
 Format: `done <INDEX>`
 * Marks the task in the specified `INDEX` as done. 
-* The index refers to the index number shown in the task list.
+* `<INDEX>` refers to the index number shown in the task list.
 * The index **must be a positive integer** 1,2,3...
 > Example
 ```
@@ -127,8 +136,8 @@ Format: `done <INDEX>`
 ## 3.6. Finding tasks by keyword: `find`
 Find all tasks with description that matches the given keyword. <br>
 Format: `find <KEYWORD>`
-* Searches for tasks with description that matches the specified `KEYWORD`.
-* The search is case-insensitive e.g. `book` will match `Book`.
+* `<KEYWORD>` is a parameter for a single word that you input as a keyword e.g. `book`
+* The search is case-insensitive e.g. `book` will match `Book`, `BOOK`, etc.
 * The search matches only the description.
 * The search matches only full words e.g. `book` will not match `books`.
 > Example
@@ -144,8 +153,8 @@ Format: `find <KEYWORD>`
 ## 3.7. Viewing tasks on a date: `view`
 Find deadlines/events that are due/occur on the given date.
 Format: `view <DATE>`
-* Searches for tasks with deadline/start time which matches the specified `DATE`.
-* `DATE` must be in the format : `YYYY-MM-DD` e.g. `2020-09-28` means 28th September 2020.
+* `<DATE>` is a parameter for the date which you wish to search.
+* `DATE` must be in the format : `YYYY-MM-DD` e.g. 28th August, 2020 is expressed as `2020-08-28`.
 > Example
 ```
 >>> view 2020-08-06
@@ -157,10 +166,9 @@ Format: `view <DATE>`
 
 ## 3.8. Deleting a task: `delete`
 Deletes an **existing** task from the list.
-Format: `delete INDEX`
-* Deletes the task in the specified `INDEX`. 
-* The index refers to the index number shown in the complete task list.
-* The index **must be a positive integer** 1,2,3...
+Format: `delete <INDEX>`
+* `<INDEX>` is a parameter for the index number shown in the complete task list of the task you wish to delete .
+* `<INDEX>` **must be a positive integer** 1,2,3...
 > Example
 ```
 >>> delete 3
