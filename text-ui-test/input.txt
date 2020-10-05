@@ -9,4 +9,5 @@ todo borrow book
 list
 delete 4
 find book
+view 2020-06-06
 bye

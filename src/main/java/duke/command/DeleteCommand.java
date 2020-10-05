@@ -49,9 +49,9 @@ public class DeleteCommand extends Command {
             return;
         }
         if (numberOfTasks == 1) {
-            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " task in the list.");
+            ui.showFeedbackMessage("\tNow you have " + (numberOfTasks - 1) + " task in the list.");
         } else {
-            ui.showFeedbackMessage("\tNow you have " + numberOfTasks + " tasks in the list.");
+            ui.showFeedbackMessage("\tNow you have " + (numberOfTasks - 1) + " tasks in the list.");
         }
     }
 }
