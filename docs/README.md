@@ -145,8 +145,8 @@ Format: `find <KEYWORD>`
 >>> find book
 ------------------------------------------------------------------
     Here are the matching tasks in your list:
-    1. [T][✓] read book
-    2. [D][✘] return book (by: Jun 6 2020, 11:59 PM)
+    1.[T][✓] read book
+    2.[D][✘] return book (by: Jun 6 2020, 11:59 PM)
 ------------------------------------------------------------------
 ```
 
@@ -160,7 +160,7 @@ Format: `view <DATE>`
 >>> view 2020-08-06
 ------------------------------------------------------------------
     Here are the matching tasks in your list:
-    1. [E][✘] project meeting (at: Aug 6 2020, 02:00 PM)
+    1.[E][✘] project meeting (at: Aug 6 2020, 02:00 PM)
 ------------------------------------------------------------------
 ```
 
