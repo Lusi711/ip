@@ -25,7 +25,7 @@ This user guide gives you detailed instructions on the Duke installation process
 
 # 2. Quick Start
 1. Ensure that you have Java `11` or above installed in your Computer.
-2. Download the latest `ip.jar` from [here](https://github.com/Lusi711/ip/releases/tag/v2%2C0).
+2. Download the latest version of `ip.jar` from [here](https://github.com/Lusi711/ip/releases).
 3. Copy the file to the folder you want to use as the *home folder* for your Duke.
 4. Open a command window in that folder.
 5. Run the command `java -jar ip,jar` to start the app. 
