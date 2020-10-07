@@ -107,6 +107,7 @@ Format: `event <DESCRIPTION> \by <DATE> <START_TIME>`
 ## 3.4. Listing all tasks: `list`
 Shows a list of all the tasks in task list in order of input. <br>
 Format: `list`
+
 >Example
 ```
 >>> list
@@ -124,6 +125,7 @@ Format: `done <INDEX>`
 * Marks the task in the specified `INDEX` as done. 
 * `<INDEX>` refers to the index number shown in the task list.
 * The index **must be a positive integer** 1,2,3...
+
 > Example
 ```
 >>> done 1
@@ -140,6 +142,7 @@ Format: `find <KEYWORD>`
 * The search is case-insensitive e.g. `book` will match `Book`, `BOOK`, etc.
 * The search matches only the description.
 * The search matches only full words e.g. `book` will not match `books`.
+
 > Example
 ```
 >>> find book
@@ -155,6 +158,7 @@ Find deadlines/events that are due/occur on the given date.
 Format: `view <DATE>`
 * `<DATE>` is a parameter for the date which you wish to search.
 * `DATE` must be in the format : `YYYY-MM-DD` e.g. 28th August, 2020 is expressed as `2020-08-28`.
+
 > Example
 ```
 >>> view 2020-08-06
@@ -169,6 +173,7 @@ Deletes an **existing** task from the list.
 Format: `delete <INDEX>`
 * `<INDEX>` is a parameter for the index number shown in the complete task list of the task you wish to delete .
 * `<INDEX>` **must be a positive integer** 1,2,3...
+
 > Example
 ```
 >>> delete 3
@@ -190,6 +195,7 @@ Format: `bye`
 ```
 
 # 4. Command Summary
+
 Actions | Format, Examples
 ------- | ----------------
 Add Todo| `todo DESCRIPTION`
@@ -213,6 +219,7 @@ A. The console of your Computer does not support the Code Page.
 
 # 6. Troubleshooting
 The table below shows the possible error messages you may see, the possible reasons and ways to deal with them. <br>
+
 Message | Possible reason | What to do now
 ------- | --------------- | --------------
 ```OOPS!!! I'm sorry, but I don't know what that means :-(``` | You typed a command that does not exist in features. | Refer to [Features](#3-features) to learn the proper formatting.
